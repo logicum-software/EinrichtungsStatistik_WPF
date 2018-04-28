@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EinrichtungsStatistik
 {
+    [Serializable]
     class Frage
     {
         private String strFragetext;
