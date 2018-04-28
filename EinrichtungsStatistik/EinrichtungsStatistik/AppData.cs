@@ -23,5 +23,25 @@ namespace EinrichtungsStatistik
             Frageboegen = frageboegen;
             Fragen = fragen;
         }
+
+        internal ArrayList getFrageboegen()
+        {
+            return Frageboegen;
+        }
+
+        internal void setFrageboegen(ArrayList frageboegen)
+        {
+            Frageboegen = frageboegen;
+        }
+
+        internal ArrayList getFragen()
+        {
+            return Fragen;
+        }
+
+        internal void setFragen(ArrayList fragen)
+        {
+            Fragen = fragen;
+        }
     }
 }
