@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,14 +22,36 @@ namespace EinrichtungsStatistik
     /// </summary>
     public partial class Fragebogenentwurf : Window
     {
+        private AppData appData;
+
         public Fragebogenentwurf()
         {
             InitializeComponent();
+            IFormatter formatter = new BinaryFormatter();
+            try
+            {
+                Stream stream = new FileStream("udata.dat", FileMode.Open, FileAccess.Read, FileShare.Read);
+                appData = (AppData)formatter.Deserialize(stream);
+                stream.Close();
+            }
+            catch (FileNotFoundException e)
+            {
+                MessageBox.Show("Datei wurde nicht gefunden.\n" + e.Message, "Dateifehler", MessageBoxButton.OK);
+                appData = new AppData();
+                //Application.Current.Shutdown();
+                //throw;
+            }
         }
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NeueFrage dlgNeueFage = new NeueFrage();
+            dlgNeueFage.ShowDialog();
         }
     }
 }

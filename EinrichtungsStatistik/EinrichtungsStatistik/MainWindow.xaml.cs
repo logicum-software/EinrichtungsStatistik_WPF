@@ -28,7 +28,7 @@ namespace EinrichtungsStatistik
         public MainWindow()
         {
             InitializeComponent();
-            IFormatter formatter = new BinaryFormatter();
+            /*IFormatter formatter = new BinaryFormatter();
             try
             {
                 Stream stream = new FileStream("udata.dat", FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -40,14 +40,14 @@ namespace EinrichtungsStatistik
                 MessageBox.Show("Datei wurde nicht gefunden.\n" + e.Message, "Dateifehler", MessageBoxButton.OK);
                 //Application.Current.Shutdown();
                 //throw;
-            }
+            }*/
         }
 
         private void buttonBeenden_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Möchten Sie das Programm beenden?", "Programm beenden", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            /*if (MessageBox.Show("Möchten Sie das Programm beenden?", "Programm beenden", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                 return;
-            else
+            else*/
                 Application.Current.Shutdown();
         }
 
