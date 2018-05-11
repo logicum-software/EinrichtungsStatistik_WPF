@@ -38,7 +38,7 @@ namespace EinrichtungsStatistik
             catch (FileNotFoundException e)
             {
                 MessageBox.Show("Datei wurde nicht gefunden.\n" + e.Message, "Dateifehler", MessageBoxButton.OK);
-                //Application.Current.Shutdown();
+                Application.Current.Shutdown();
                 //throw;
             }
         }
@@ -49,6 +49,13 @@ namespace EinrichtungsStatistik
                 return;
             else
                 Application.Current.Shutdown();
+        }
+
+        private void buttonFragebogenentwurf_Click(object sender, RoutedEventArgs e)
+        {
+            Fragebogenentwurf dlgEntwurf = new Fragebogenentwurf();
+            dlgEntwurf.ShowDialog();
+
         }
     }
 }
