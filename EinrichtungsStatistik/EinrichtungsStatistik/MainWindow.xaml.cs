@@ -23,8 +23,6 @@ namespace EinrichtungsStatistik
     /// </summary>
     public partial class MainWindow : Window
     {
-        private AppData appData;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -55,7 +53,6 @@ namespace EinrichtungsStatistik
         {
             Fragebogenentwurf dlgEntwurf = new Fragebogenentwurf();
             dlgEntwurf.ShowDialog();
-
         }
     }
 }

@@ -8,7 +8,7 @@
         Title="NeueFrage" Height="235" Width="370" WindowStartupLocation="CenterScreen" MinHeight="235" MinWidth="370">
     <Grid>
         <Label x:Name="label" Content="Fragetext" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxFragetext" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="Bitte Fragetext eingeben..." VerticalAlignment="Top" Width="342" TextInput="textBoxFragetext_TextInput"/>
+        <TextBox x:Name="textBoxFragetext" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="Bitte Fragetext eingeben..." VerticalAlignment="Top" Width="342" TextChanged="textBoxFragetext_TextChanged"/>
         <GroupBox x:Name="groupBox" Header="Antwortart" HorizontalAlignment="Left" Height="100" Margin="10,64,0,0" VerticalAlignment="Top" Width="342">
             <Grid Margin="0">
                 <RadioButton x:Name="radioButtonAuswahl" Content="Auswahl (1 - 5)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>

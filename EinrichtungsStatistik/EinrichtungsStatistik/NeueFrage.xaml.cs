@@ -31,10 +31,15 @@ namespace EinrichtungsStatistik
             this.Close();
         }
 
-        private void textBoxFragetext_TextInput(object sender, TextCompositionEventArgs e)
+        private void textBoxFragetext_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Funktioniert noch nicht !!!
-            buttonSave.IsEnabled = true;
+            if (buttonSave != null)
+            {
+                if (textBoxFragetext.Text != "" && textBoxFragetext.Text != "Bitte Fragetext eingeben...")
+                    buttonSave.IsEnabled = true;
+                else
+                    buttonSave.IsEnabled = false;
+            }
         }
     }
 }
