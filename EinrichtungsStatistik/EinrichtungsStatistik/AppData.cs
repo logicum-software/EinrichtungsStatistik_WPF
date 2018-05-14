@@ -44,5 +44,11 @@ namespace EinrichtungsStatistik
         {
             Fragen = fragen;
         }
+
+        internal void addFrage(Frage frage)
+        {
+            if (frage != null)
+                Fragen.Add(frage);
+        }
     }
 }

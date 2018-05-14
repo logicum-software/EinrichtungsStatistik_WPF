@@ -19,11 +19,18 @@ namespace EinrichtungsStatistik
     /// </summary>
     public partial class NeueFrage : Window
     {
+        private Frage tmpFrage;
+
         public NeueFrage()
         {
             InitializeComponent();
             textBoxFragetext.Focus();
             textBoxFragetext.SelectAll();
+        }
+
+        internal Frage getFrage()
+        {
+            return tmpFrage;
         }
 
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
@@ -40,6 +47,18 @@ namespace EinrichtungsStatistik
                 else
                     buttonSave.IsEnabled = false;
             }
+        }
+
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        {
+            int i;
+            if (radioButtonAuswahl.IsChecked == true)
+                i = 0;
+            else
+                i = 1;
+
+            tmpFrage = new Frage(textBoxFragetext.Text, i);
+            this.Close();
         }
     }
 }

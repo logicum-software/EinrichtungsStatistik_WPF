@@ -28,7 +28,7 @@
             </ListView>
         </GroupBox>
         <Button x:Name="buttonSchliessen" Content="Schliessen" Margin="0,0,27,10" Click="buttonSchliessen_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
-        <Button Content="Neue Frage" HorizontalAlignment="Left" Margin="434,429,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
+        <Button x:Name="buttonNeueFrage" Content="Neue Frage" HorizontalAlignment="Left" Margin="434,429,0,0" VerticalAlignment="Top" Width="100" Click="buttonNeueFrage_Click"/>
         <Button Content="Frage bearbeiten" HorizontalAlignment="Left" Margin="551,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
         <Button Content="Frage löschen" HorizontalAlignment="Left" Margin="667,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
         <Button Content="Fragebogen auswählen" HorizontalAlignment="Left" Margin="559,23,0,0" VerticalAlignment="Top" Width="140"/>

@@ -33,6 +33,7 @@ namespace EinrichtungsStatistik
                 Stream stream = new FileStream("udata.dat", FileMode.Open, FileAccess.Read, FileShare.Read);
                 appData = (AppData)formatter.Deserialize(stream);
                 stream.Close();
+                refreshLists();
             }
             catch (FileNotFoundException e)
             {
@@ -43,15 +44,50 @@ namespace EinrichtungsStatistik
             }
         }
 
+        private void refreshLists()
+        {
+            listViewFragen.Items.Clear();
+
+            foreach (Frage item in appData.getFragen())
+            {
+                listViewFragen.Items.Add(item.getFragetext());
+            }
+        }
+
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void buttonNeueFrage_Click(object sender, RoutedEventArgs e)
         {
-            NeueFrage dlgNeueFage = new NeueFrage();
-            dlgNeueFage.ShowDialog();
+            NeueFrage dlgNeueFrage = new NeueFrage();
+            dlgNeueFrage.ShowDialog();
+
+            appData.addFrage(dlgNeueFrage.getFrage());
+
+            /* Überprüfung der Eingabe
+            MessageBox.Show(dlgNeueFrage.getFrage().getFragetext(), "Eingegebene Frage", MessageBoxButton.OK);*/
+
+            FileStream fs = new FileStream("udata.dat", FileMode.Create);
+
+            // Construct a BinaryFormatter and use it to serialize the data to the stream.
+            BinaryFormatter formatter = new BinaryFormatter();
+            try
+            {
+                formatter.Serialize(fs, appData);
+            }
+            catch (SerializationException ec)
+            {
+                MessageBox.Show(ec.Message, "Speicherfehler", MessageBoxButton.OK);
+                //Console.WriteLine("Failed to serialize. Reason: " + ec.Message);
+                throw;
+            }
+            finally
+            {
+                fs.Close();
+            }
+            refreshLists();
         }
     }
 }
