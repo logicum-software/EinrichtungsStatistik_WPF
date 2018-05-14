@@ -36,7 +36,7 @@ namespace EinrichtungsStatistik
             }
             catch (FileNotFoundException e)
             {
-                MessageBox.Show("Datei wurde nicht gefunden.\n" + e.Message, "Dateifehler", MessageBoxButton.OK);
+                MessageBox.Show(e.Message, "Dateifehler", MessageBoxButton.OK);
                 appData = new AppData();
                 //Application.Current.Shutdown();
                 //throw;

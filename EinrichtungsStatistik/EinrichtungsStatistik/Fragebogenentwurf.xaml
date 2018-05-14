@@ -31,8 +31,8 @@
         <Button Content="Neue Frage" HorizontalAlignment="Left" Margin="434,429,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
         <Button Content="Frage bearbeiten" HorizontalAlignment="Left" Margin="551,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
         <Button Content="Frage löschen" HorizontalAlignment="Left" Margin="667,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
-        <Button Content="Fragebogen laden" HorizontalAlignment="Left" Margin="559,23,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Fragebogen auswählen" HorizontalAlignment="Left" Margin="559,23,0,0" VerticalAlignment="Top" Width="140"/>
         <Button Content="Neuer Fragebogen" HorizontalAlignment="Left" Margin="434,23,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Speichern" HorizontalAlignment="Left" Margin="684,23,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+        <Button Content="Änderungen speichern" HorizontalAlignment="Left" Margin="25,429,0,0" VerticalAlignment="Top" Width="149" IsEnabled="False"/>
     </Grid>
 </Window>
