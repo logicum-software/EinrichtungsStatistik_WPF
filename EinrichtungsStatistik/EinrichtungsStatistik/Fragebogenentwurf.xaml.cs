@@ -66,10 +66,12 @@ namespace EinrichtungsStatistik
 
             foreach (Frage item in appData.getFragen())
             {
-                if (String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) == 0)
+                if (String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) > -1 &&
+                    String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) < 1)
                 {
-                    MessageBox.Show("Die eingegebene Frage ist bereits vorhanden.", "Frage vorhanden", MessageBoxButton.OK);
-                    return;
+                    if (MessageBox.Show("Die eingegebene Frage hat Ähnlichkeit mit folgender Frage:\n\n" + item.getFragetext() + "\n\n" + "Möchten Sie die Frage dennoch speichern?", 
+                        "Frage bereits vorhanden", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                        return;
                 }
             }
 
@@ -106,7 +108,6 @@ namespace EinrichtungsStatistik
 
         private void buttonFrageLoeschen_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }
