@@ -19,7 +19,7 @@
             </ListView>
         </GroupBox>
         <GroupBox Header="Fragenkatalog" HorizontalAlignment="Left" Height="350" Margin="434,74,0,0" VerticalAlignment="Top" Width="333">
-            <ListView x:Name="listViewFragen" Margin="10">
+            <ListView x:Name="listViewFragen" Margin="10" SelectionChanged="listViewFragen_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>
@@ -30,7 +30,7 @@
         <Button x:Name="buttonSchliessen" Content="Schliessen" Margin="0,0,27,10" Click="buttonSchliessen_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
         <Button x:Name="buttonNeueFrage" Content="Neue Frage" HorizontalAlignment="Left" Margin="434,429,0,0" VerticalAlignment="Top" Width="100" Click="buttonNeueFrage_Click"/>
         <Button Content="Frage bearbeiten" HorizontalAlignment="Left" Margin="551,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
-        <Button Content="Frage löschen" HorizontalAlignment="Left" Margin="667,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
+        <Button x:Name="buttonFrageLoeschen" Content="Frage löschen" HorizontalAlignment="Left" Margin="667,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageLoeschen_Click"/>
         <Button Content="Fragebogen auswählen" HorizontalAlignment="Left" Margin="559,23,0,0" VerticalAlignment="Top" Width="140"/>
         <Button Content="Neuer Fragebogen" HorizontalAlignment="Left" Margin="434,23,0,0" VerticalAlignment="Top" Width="120"/>
         <Button Content="Änderungen speichern" HorizontalAlignment="Left" Margin="25,429,0,0" VerticalAlignment="Top" Width="149" IsEnabled="False"/>

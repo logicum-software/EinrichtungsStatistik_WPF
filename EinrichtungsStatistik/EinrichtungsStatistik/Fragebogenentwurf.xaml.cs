@@ -64,6 +64,15 @@ namespace EinrichtungsStatistik
             NeueFrage dlgNeueFrage = new NeueFrage();
             dlgNeueFrage.ShowDialog();
 
+            foreach (Frage item in appData.getFragen())
+            {
+                if (String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) == 0)
+                {
+                    MessageBox.Show("Die eingegebene Frage ist bereits vorhanden.", "Frage vorhanden", MessageBoxButton.OK);
+                    return;
+                }
+            }
+
             appData.addFrage(dlgNeueFrage.getFrage());
 
             /* Überprüfung der Eingabe
@@ -88,6 +97,16 @@ namespace EinrichtungsStatistik
                 fs.Close();
             }
             refreshLists();
+        }
+
+        private void listViewFragen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            buttonFrageLoeschen.IsEnabled = true;
+        }
+
+        private void buttonFrageLoeschen_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
