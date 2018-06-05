@@ -50,5 +50,10 @@ namespace EinrichtungsStatistik
             if (frage != null)
                 Fragen.Add(frage);
         }
+
+        internal void deleteFrage(Frage frage)
+        {
+            Fragen.Remove(frage);
+        }
     }
 }

@@ -44,6 +44,28 @@ namespace EinrichtungsStatistik
             }
         }
 
+        private void saveData()
+        {
+            FileStream fs = new FileStream("udata.dat", FileMode.Create);
+
+            // Construct a BinaryFormatter and use it to serialize the data to the stream.
+            BinaryFormatter formatter = new BinaryFormatter();
+            try
+            {
+                formatter.Serialize(fs, appData);
+            }
+            catch (SerializationException ec)
+            {
+                MessageBox.Show(ec.Message, "Speicherfehler", MessageBoxButton.OK);
+                //Console.WriteLine("Failed to serialize. Reason: " + ec.Message);
+                throw;
+            }
+            finally
+            {
+                fs.Close();
+            }
+        }
+
         private void refreshLists()
         {
             listViewFragen.Items.Clear();
@@ -80,24 +102,7 @@ namespace EinrichtungsStatistik
             /* Überprüfung der Eingabe
             MessageBox.Show(dlgNeueFrage.getFrage().getFragetext(), "Eingegebene Frage", MessageBoxButton.OK);*/
 
-            FileStream fs = new FileStream("udata.dat", FileMode.Create);
-
-            // Construct a BinaryFormatter and use it to serialize the data to the stream.
-            BinaryFormatter formatter = new BinaryFormatter();
-            try
-            {
-                formatter.Serialize(fs, appData);
-            }
-            catch (SerializationException ec)
-            {
-                MessageBox.Show(ec.Message, "Speicherfehler", MessageBoxButton.OK);
-                //Console.WriteLine("Failed to serialize. Reason: " + ec.Message);
-                throw;
-            }
-            finally
-            {
-                fs.Close();
-            }
+            saveData();
             refreshLists();
         }
 
@@ -108,6 +113,25 @@ namespace EinrichtungsStatistik
 
         private void buttonFrageLoeschen_Click(object sender, RoutedEventArgs e)
         {
+            if (listViewFragen.SelectedItem != null)
+            {
+                if (MessageBox.Show("Möchten Sie die folgende Frage wirklich löschen?\n\n" + listViewFragen.SelectedItem.ToString(), "Frage löschen", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                    return;
+                else
+                {
+                    foreach (Frage item in appData.getFragen())
+                    {
+                        if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
+                        {
+                            appData.deleteFrage(item);
+                            listViewFragen.Items.Remove(listViewFragen.SelectedItem.ToString());
+                            saveData();
+                            refreshLists();
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 }
