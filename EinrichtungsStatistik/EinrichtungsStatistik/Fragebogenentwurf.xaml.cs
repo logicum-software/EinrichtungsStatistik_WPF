@@ -27,21 +27,8 @@ namespace EinrichtungsStatistik
         public Fragebogenentwurf()
         {
             InitializeComponent();
-            IFormatter formatter = new BinaryFormatter();
-            try
-            {
-                Stream stream = new FileStream("udata.dat", FileMode.Open, FileAccess.Read, FileShare.Read);
-                appData = (AppData)formatter.Deserialize(stream);
-                stream.Close();
-                refreshLists();
-            }
-            catch (FileNotFoundException e)
-            {
-                MessageBox.Show(e.Message, "Dateifehler", MessageBoxButton.OK);
-                appData = new AppData();
-                //Application.Current.Shutdown();
-                //throw;
-            }
+            loadData();
+            refreshLists();
         }
 
         private void saveData()
@@ -63,6 +50,24 @@ namespace EinrichtungsStatistik
             finally
             {
                 fs.Close();
+            }
+        }
+
+        private void loadData()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            try
+            {
+                Stream stream = new FileStream("udata.dat", FileMode.Open, FileAccess.Read, FileShare.Read);
+                appData = (AppData)formatter.Deserialize(stream);
+                stream.Close();
+            }
+            catch (FileNotFoundException e)
+            {
+                MessageBox.Show(e.Message, "Dateifehler", MessageBoxButton.OK);
+                appData = new AppData();
+                //Application.Current.Shutdown();
+                //throw;
             }
         }
 
