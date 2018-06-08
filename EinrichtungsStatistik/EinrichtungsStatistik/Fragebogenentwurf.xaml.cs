@@ -154,7 +154,28 @@ namespace EinrichtungsStatistik
 
         private void buttonFrageBearbeiten_Click(object sender, RoutedEventArgs e)
         {
+            NeueFrage dlgFrageBearbeiten = new NeueFrage();
 
+            foreach (Frage item in appData.getFragen())
+            {
+                if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
+                {
+                    dlgFrageBearbeiten.setFrage(item);
+                    dlgFrageBearbeiten.ShowDialog();
+
+                    if (dlgFrageBearbeiten.DialogResult.HasValue && dlgFrageBearbeiten.DialogResult.Value)
+                    {
+                        if (MessageBox.Show("Möchten Sie die Frage:\n\n" + item.getFragetext() + "\n\n" + "wirklich ändern in:\n\n" +
+                            dlgFrageBearbeiten.getFrage().getFragetext(), "Frage ändern", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                            return;
+                    }
+                    item.setFragetext(dlgFrageBearbeiten.getFrage().getFragetext());
+                    item.setAntwortart(dlgFrageBearbeiten.getFrage().getAntwortart());
+                    saveData();
+                    refreshLists();
+                    break;
+                }
+            }
         }
     }
 }

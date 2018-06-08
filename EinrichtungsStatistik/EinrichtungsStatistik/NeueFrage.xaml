@@ -15,8 +15,8 @@
                 <RadioButton x:Name="radioButtonFreierText" Content="Freier Text" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="buttonSave" Content="Speichern" HorizontalAlignment="Left" Margin="10,169,0,0" Width="75" Height="20" IsEnabled="False" VerticalAlignment="Top" Click="buttonSave_Click"/>
-        <Button x:Name="buttonCancel" Content="Abbrechen" Margin="277,169,10,0" Height="20" VerticalAlignment="Top" Click="buttonCancel_Click"/>
+        <Button x:Name="buttonSave" Content="Speichern" HorizontalAlignment="Left" Margin="10,169,0,0" Width="75" Height="20" IsEnabled="False" VerticalAlignment="Top" Click="buttonSave_Click" IsDefault="True"/>
+        <Button x:Name="buttonCancel" Content="Abbrechen" Margin="277,169,10,0" Height="20" VerticalAlignment="Top" Click="buttonCancel_Click" IsCancel="True"/>
 
     </Grid>
 </Window>

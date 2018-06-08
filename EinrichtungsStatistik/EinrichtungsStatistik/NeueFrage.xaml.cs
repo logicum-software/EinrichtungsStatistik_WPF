@@ -33,8 +33,20 @@ namespace EinrichtungsStatistik
             return tmpFrage;
         }
 
+        internal void setFrage(Frage frage)
+        {
+            tmpFrage = frage;
+            textBoxFragetext.Text = tmpFrage.getFragetext();
+
+            if (tmpFrage.getAntwortart() == 0)
+                radioButtonAuswahl.IsChecked = true;
+            else
+                radioButtonFreierText.IsChecked = true;
+        }
+
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             this.Close();
         }
 
@@ -58,6 +70,8 @@ namespace EinrichtungsStatistik
                 i = 1;
 
             tmpFrage = new Frage(textBoxFragetext.Text, i);
+
+            DialogResult = true;
             this.Close();
         }
     }
