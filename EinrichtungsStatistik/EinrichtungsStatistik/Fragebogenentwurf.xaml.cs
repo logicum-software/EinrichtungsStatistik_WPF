@@ -91,14 +91,18 @@ namespace EinrichtungsStatistik
             NeueFrage dlgNeueFrage = new NeueFrage();
             dlgNeueFrage.ShowDialog();
 
-            foreach (Frage item in appData.getFragen())
+            // Only if Result OK
+            if (dlgNeueFrage.DialogResult.HasValue && dlgNeueFrage.DialogResult.Value)
             {
-                if (String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) > -1 &&
-                    String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) < 1)
+                foreach (Frage item in appData.getFragen())
                 {
-                    if (MessageBox.Show("Die eingegebene Frage hat Ähnlichkeit mit folgender Frage:\n\n" + item.getFragetext() + "\n\n" + "Möchten Sie die Frage dennoch speichern?", 
-                        "Frage bereits vorhanden", MessageBoxButton.YesNo) == MessageBoxResult.No)
-                        return;
+                    if (String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) > -1 &&
+                        String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) < 1)
+                    {
+                        if (MessageBox.Show("Die eingegebene Frage hat Ähnlichkeit mit folgender Frage:\n\n" + item.getFragetext() + "\n\n" + "Möchten Sie die Frage dennoch speichern?",
+                            "Frage bereits vorhanden", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                            return;
+                    }
                 }
             }
 
@@ -113,7 +117,16 @@ namespace EinrichtungsStatistik
 
         private void listViewFragen_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            buttonFrageLoeschen.IsEnabled = true;
+            if (listViewFragen.SelectedItem != null )
+            {
+                buttonFrageLoeschen.IsEnabled = true;
+                buttonFrageBearbeiten.IsEnabled = true;
+            }
+            else
+            {
+                buttonFrageLoeschen.IsEnabled = false;
+                buttonFrageBearbeiten.IsEnabled = false;
+            }
         }
 
         private void buttonFrageLoeschen_Click(object sender, RoutedEventArgs e)
@@ -137,6 +150,11 @@ namespace EinrichtungsStatistik
                     }
                 }
             }
+        }
+
+        private void buttonFrageBearbeiten_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
