@@ -28,6 +28,7 @@ namespace EinrichtungsStatistik
         {
             InitializeComponent();
             loadData();
+            textBoxFragebogenName.Text = "Fragebogen " + (appData.getFrageboegenCount() + 1);
             refreshLists();
         }
 
@@ -79,6 +80,15 @@ namespace EinrichtungsStatistik
             {
                 listViewFragen.Items.Add(item.getFragetext());
             }
+
+            foreach (Fragebogen item in appData.getFrageboegen())
+            {
+                if (String.Compare(item.getName(), textBoxFragebogenName.Text, true) == 0)
+                {
+                    foreach (Frage item2 in item.getFragen())
+                        listViewEnthalteneFragen.Items.Add(item2.getFragetext());
+                }
+            }
         }
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
@@ -121,11 +131,13 @@ namespace EinrichtungsStatistik
             {
                 buttonFrageLoeschen.IsEnabled = true;
                 buttonFrageBearbeiten.IsEnabled = true;
+                buttonArrowLeft.IsEnabled = true;
             }
             else
             {
                 buttonFrageLoeschen.IsEnabled = false;
                 buttonFrageBearbeiten.IsEnabled = false;
+                buttonArrowRight.IsEnabled = false;
             }
         }
 
@@ -174,6 +186,17 @@ namespace EinrichtungsStatistik
                     saveData();
                     refreshLists();
                     break;
+                }
+            }
+        }
+
+        private void buttonArrowLeft_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Frage item in appData.getFragen())
+            {
+                if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
+                {
+
                 }
             }
         }

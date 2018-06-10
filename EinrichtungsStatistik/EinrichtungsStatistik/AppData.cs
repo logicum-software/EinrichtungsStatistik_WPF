@@ -35,6 +35,11 @@ namespace EinrichtungsStatistik
             Frageboegen = frageboegen;
         }
 
+        internal int getFrageboegenCount()
+        {
+            return Frageboegen.Count;
+        }
+
         internal ArrayList getFragen()
         {
             return Fragen;

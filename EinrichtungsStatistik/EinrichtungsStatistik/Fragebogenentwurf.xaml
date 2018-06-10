@@ -8,7 +8,7 @@
         Title="Fragebogenentwurf" Height="550" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Label Content="Ausgewählter Fragebogen" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="textBoxFragebogenName" HorizontalAlignment="Left" Height="23" Margin="179,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
         <GroupBox Header="Enthaltene Fragen" HorizontalAlignment="Left" Height="350" Margin="25,74,0,25" VerticalAlignment="Top" Width="354">
             <ListView x:Name="listViewEnthalteneFragen" Margin="10,10,10,11">
                 <ListView.View>
@@ -34,7 +34,7 @@
         <Button Content="Fragebogen auswählen" HorizontalAlignment="Left" Margin="559,23,0,0" VerticalAlignment="Top" Width="140"/>
         <Button Content="Neuer Fragebogen" HorizontalAlignment="Left" Margin="434,23,0,0" VerticalAlignment="Top" Width="120"/>
         <Button Content="Änderungen speichern" HorizontalAlignment="Left" Margin="25,429,0,0" VerticalAlignment="Top" Width="149" IsEnabled="False"/>
-        <Button Content="&lt;-" HorizontalAlignment="Left" Margin="396,200,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False"/>
-        <Button Content="-&gt;" HorizontalAlignment="Left" Margin="396,280,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False"/>
+        <Button x:Name="buttonArrowLeft" Content="&lt;-" HorizontalAlignment="Left" Margin="396,200,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowLeft_Click"/>
+        <Button x:Name="buttonArrowRight" Content="-&gt;" HorizontalAlignment="Left" Margin="396,280,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False"/>
     </Grid>
 </Window>
