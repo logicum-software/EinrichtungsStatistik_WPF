@@ -23,12 +23,14 @@ namespace EinrichtungsStatistik
     public partial class Fragebogenentwurf : Window
     {
         private AppData appData;
+        private Fragebogen tmpFragebogen;
 
         public Fragebogenentwurf()
         {
             InitializeComponent();
             loadData();
-            textBoxFragebogenName.Text = "Fragebogen " + (appData.getFrageboegenCount() + 1);
+            tmpFragebogen = new Fragebogen("Fragebogen " + (appData.getFrageboegenCount() + 1), new System.Collections.ArrayList());
+            textBoxFragebogenName.Text = tmpFragebogen.getName();
             refreshLists();
         }
 
@@ -81,18 +83,23 @@ namespace EinrichtungsStatistik
                 listViewFragen.Items.Add(item.getFragetext());
             }
 
-            foreach (Fragebogen item in appData.getFrageboegen())
+            foreach (Frage item in tmpFragebogen.getFragen())
             {
-                if (String.Compare(item.getName(), textBoxFragebogenName.Text, true) == 0)
-                {
-                    foreach (Frage item2 in item.getFragen())
-                        listViewEnthalteneFragen.Items.Add(item2.getFragetext());
-                }
+                listViewEnthalteneFragen.Items.Add(item.getFragetext());
             }
         }
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
         {
+            if (listViewEnthalteneFragen.Items.Count > 0)
+            {
+                if (MessageBox.Show("Der aktuelle Fragebogen enthält ungesicherte Änderungen.\nMöchten Sie ihn vorher speichern",
+                    "Fragebogen speichern", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    appData.getFrageboegen().Add(tmpFragebogen);
+                    saveData();
+                }
+            }
             this.Close();
         }
 
@@ -196,9 +203,18 @@ namespace EinrichtungsStatistik
             {
                 if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
                 {
-
+                    tmpFragebogen.getFragen().Add(item);
+                    refreshLists();
+                    MessageBox.Show("Die Frage:\n\n" + item.getFragetext() + "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
+                    return;
                 }
             }
+        }
+
+        private void buttonSpeichern_Click(object sender, RoutedEventArgs e)
+        {
+            appData.getFrageboegen().Add(tmpFragebogen);
+            saveData();
         }
     }
 }
