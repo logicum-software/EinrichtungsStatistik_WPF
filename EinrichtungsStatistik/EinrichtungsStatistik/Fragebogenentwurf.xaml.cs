@@ -77,6 +77,7 @@ namespace EinrichtungsStatistik
         private void refreshLists()
         {
             listViewFragen.Items.Clear();
+            listViewEnthalteneFragen.Items.Clear();
 
             foreach (Frage item in appData.getFragen())
             {
@@ -93,7 +94,7 @@ namespace EinrichtungsStatistik
         {
             if (listViewEnthalteneFragen.Items.Count > 0)
             {
-                if (MessageBox.Show("Der aktuelle Fragebogen enthält ungesicherte Änderungen.\nMöchten Sie ihn vorher speichern",
+                if (MessageBox.Show("Der aktuelle Fragebogen enthält ungesicherte Änderungen.\nMöchten Sie ihn vorher speichern?",
                     "Fragebogen speichern", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     appData.getFrageboegen().Add(tmpFragebogen);
@@ -139,6 +140,7 @@ namespace EinrichtungsStatistik
                 buttonFrageLoeschen.IsEnabled = true;
                 buttonFrageBearbeiten.IsEnabled = true;
                 buttonArrowLeft.IsEnabled = true;
+                buttonArrowRight.IsEnabled = false;
             }
             else
             {
@@ -204,6 +206,8 @@ namespace EinrichtungsStatistik
                 if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
                 {
                     tmpFragebogen.getFragen().Add(item);
+
+                    // <-- TODO --> Hier müssen die hinzugefügten Fragen aus dem Katalog entfernt oder disabled werden
                     refreshLists();
                     MessageBox.Show("Die Frage:\n\n" + item.getFragetext() + "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
                     return;
@@ -215,6 +219,26 @@ namespace EinrichtungsStatistik
         {
             appData.getFrageboegen().Add(tmpFragebogen);
             saveData();
+        }
+
+        private void listViewEnthalteneFragen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listViewEnthalteneFragen.SelectedItem != null)
+            {
+                buttonArrowRight.IsEnabled = true;
+                buttonFrageLoeschen.IsEnabled = false;
+                buttonFrageBearbeiten.IsEnabled = false;
+                buttonArrowLeft.IsEnabled = false;
+            }
+            else
+            {
+                buttonArrowRight.IsEnabled = false;
+            }
+        }
+
+        private void buttonArrowRight_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
