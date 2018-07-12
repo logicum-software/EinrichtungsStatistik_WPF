@@ -205,12 +205,14 @@ namespace EinrichtungsStatistik
                 if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
                 {
                     tmpFragebogen.getFragen().Add(item);
+                    // Hier wird die hinzugefügte Frage aus der listView entfernt
                     listViewFragen.Items.RemoveAt(listViewFragen.SelectedIndex);
-
-                    // <-- TODO --> Hier müssen die hinzugefügten Fragen aus dem Katalog entfernt oder disabled werden
                     refreshLists();
                     MessageBox.Show("Die Frage:\n\n" + item.getFragetext() + "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
                     buttonArrowLeft.IsEnabled = false;
+                    if (!buttonSpeichern.IsEnabled)
+                        buttonSpeichern.IsEnabled = true;
+
                     return;
                 }
             }
@@ -218,8 +220,14 @@ namespace EinrichtungsStatistik
 
         private void buttonSpeichern_Click(object sender, RoutedEventArgs e)
         {
-            appData.getFrageboegen().Add(tmpFragebogen);
-            saveData();
+            // <-- ToDo ÜBERARBEITEN -->
+            if (MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.getName() + "\n\n" + "enthält keine Fragen.\n\n" +
+                "Möchten Sie ihn trotzdem speichern?", "Frage speichern", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                appData.getFrageboegen().Add(tmpFragebogen);
+                saveData();
+                MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.getName() + "\n\nwurde gespeichert.", "Frage gespeichert", MessageBoxButton.OK);
+            }
         }
 
         private void listViewEnthalteneFragen_SelectionChanged(object sender, SelectionChangedEventArgs e)
