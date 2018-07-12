@@ -81,13 +81,12 @@ namespace EinrichtungsStatistik
 
             foreach (Frage item in appData.getFragen())
             {
-                listViewFragen.Items.Add(item.getFragetext());
+                if (!tmpFragebogen.getFragen().Contains(item))
+                    listViewFragen.Items.Add(item.getFragetext());
             }
 
             foreach (Frage item in tmpFragebogen.getFragen())
-            {
                 listViewEnthalteneFragen.Items.Add(item.getFragetext());
-            }
         }
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
@@ -206,6 +205,7 @@ namespace EinrichtungsStatistik
                 if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
                 {
                     tmpFragebogen.getFragen().Add(item);
+                    listViewFragen.Items.RemoveAt(listViewFragen.SelectedIndex);
 
                     // <-- TODO --> Hier müssen die hinzugefügten Fragen aus dem Katalog entfernt oder disabled werden
                     refreshLists();
