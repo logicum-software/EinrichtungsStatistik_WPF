@@ -210,6 +210,7 @@ namespace EinrichtungsStatistik
                     // <-- TODO --> Hier müssen die hinzugefügten Fragen aus dem Katalog entfernt oder disabled werden
                     refreshLists();
                     MessageBox.Show("Die Frage:\n\n" + item.getFragetext() + "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
+                    buttonArrowLeft.IsEnabled = false;
                     return;
                 }
             }
