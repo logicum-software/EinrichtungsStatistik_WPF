@@ -76,19 +76,10 @@ namespace EinrichtungsStatistik
 
         private void refreshLists()
         {
-            listViewFragen.ItemsSource = appData.appFragen;
-
-            /*listViewFragen.Items.Clear();
-            listViewEnthalteneFragen.Items.Clear();
-
-            foreach (Frage item in appData.getFragen())
-            {
-                if (!tmpFragebogen.getFragen().Contains(item))
-                    listViewFragen.Items.Add(item.strFragetext);
-            }
-
-            foreach (Frage item in tmpFragebogen.getFragen())
-                listViewEnthalteneFragen.Items.Add(item.strFragetext);*/
+            if (listViewFragen.ItemsSource == null)
+                listViewFragen.ItemsSource = appData.appFragen;
+            else
+                listViewFragen.Items.Refresh();
         }
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
@@ -125,11 +116,7 @@ namespace EinrichtungsStatistik
                 }
             }
 
-            appData.addFrage(dlgNeueFrage.getFrage());
-
-            /* Überprüfung der Eingabe
-            MessageBox.Show(dlgNeueFrage.getFrage().strFragetext, "Eingegebene Frage", MessageBoxButton.OK);*/
-
+            appData.appFragen.Add(dlgNeueFrage.getFrage());
             saveData();
             refreshLists();
         }
@@ -155,21 +142,15 @@ namespace EinrichtungsStatistik
         {
             if (listViewFragen.SelectedItem != null)
             {
-                if (MessageBox.Show("Möchten Sie die folgende Frage wirklich löschen?\n\n" + listViewFragen.SelectedItem.ToString(), "Frage löschen", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                if (MessageBox.Show("Möchten Sie die folgende Frage wirklich aus dem Fragenkatalog löschen?\n\n\n" + 
+                    appData.appFragen.ElementAt<Frage>(listViewFragen.SelectedIndex).strFragetext +
+                    "\n\n(Die Frage steht dann nicht mehr zur Verfügung!)", "Frage löschen", MessageBoxButton.YesNo) == MessageBoxResult.No)
                     return;
                 else
                 {
-                    foreach (Frage item in appData.appFragen)
-                    {
-                        if (String.Compare(item.strFragetext, listViewFragen.SelectedItem.ToString(), true) == 0)
-                        {
-                            appData.deleteFrage(item);
-                            listViewFragen.Items.Remove(listViewFragen.SelectedItem.ToString());
-                            saveData();
-                            refreshLists();
-                            break;
-                        }
-                    }
+                    appData.appFragen.RemoveAt(listViewFragen.SelectedIndex);
+                    saveData();
+                    refreshLists();
                 }
             }
         }

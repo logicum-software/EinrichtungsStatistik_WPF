@@ -18,16 +18,5 @@ namespace EinrichtungsStatistik
             appFrageboegen = new List<Fragebogen>();
             appFragen = new List<Frage>();
         }
-
-        public void addFrage(Frage frage)
-        {
-            if (frage != null)
-                appFragen.Add(frage);
-        }
-
-        public void deleteFrage(Frage frage)
-        {
-            appFragen.Remove(frage);
-        }
     }
 }

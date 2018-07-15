@@ -19,10 +19,10 @@
             </ListView>
         </GroupBox>
         <GroupBox Header="Fragenkatalog" HorizontalAlignment="Left" Height="350" Margin="434,74,0,0" VerticalAlignment="Top" Width="333">
-            <ListView x:Name="listViewFragen" Margin="10" SelectionChanged="listViewFragen_SelectionChanged">
+            <ListView x:Name="listViewFragen" Margin="10" SelectionChanged="listViewFragen_SelectionChanged" UseLayoutRounding="True">
                 <ListView.View>
-                    <GridView AllowsColumnReorder="False">
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=strFragetext}" Header="Fragetext" Width="300"/>
+                    <GridView x:Name="gridViewFragen">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=strFragetext}" Header="Fragetext" Width="291"/>
                     </GridView>
                 </ListView.View>
             </ListView>
