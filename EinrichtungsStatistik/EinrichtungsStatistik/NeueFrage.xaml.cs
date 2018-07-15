@@ -36,9 +36,9 @@ namespace EinrichtungsStatistik
         internal void setFrage(Frage frage)
         {
             tmpFrage = frage;
-            textBoxFragetext.Text = tmpFrage.getFragetext();
+            textBoxFragetext.Text = tmpFrage.strFragetext;
 
-            if (tmpFrage.getAntwortart() == 0)
+            if (tmpFrage.nAntwortart == 0)
                 radioButtonAuswahl.IsChecked = true;
             else
                 radioButtonFreierText.IsChecked = true;

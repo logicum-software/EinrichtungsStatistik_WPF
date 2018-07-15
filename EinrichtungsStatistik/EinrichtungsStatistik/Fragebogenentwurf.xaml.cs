@@ -29,8 +29,8 @@ namespace EinrichtungsStatistik
         {
             InitializeComponent();
             loadData();
-            tmpFragebogen = new Fragebogen("Fragebogen " + (appData.getFrageboegenCount() + 1), new System.Collections.ArrayList());
-            textBoxFragebogenName.Text = tmpFragebogen.getName();
+            tmpFragebogen = new Fragebogen("Fragebogen " + (appData.appFrageboegen.Count + 1), new System.Collections.ArrayList());
+            textBoxFragebogenName.Text = tmpFragebogen.strName;
             refreshLists();
         }
 
@@ -76,17 +76,19 @@ namespace EinrichtungsStatistik
 
         private void refreshLists()
         {
-            listViewFragen.Items.Clear();
+            listViewFragen.ItemsSource = appData.appFragen;
+
+            /*listViewFragen.Items.Clear();
             listViewEnthalteneFragen.Items.Clear();
 
             foreach (Frage item in appData.getFragen())
             {
                 if (!tmpFragebogen.getFragen().Contains(item))
-                    listViewFragen.Items.Add(item.getFragetext());
+                    listViewFragen.Items.Add(item.strFragetext);
             }
 
             foreach (Frage item in tmpFragebogen.getFragen())
-                listViewEnthalteneFragen.Items.Add(item.getFragetext());
+                listViewEnthalteneFragen.Items.Add(item.strFragetext);*/
         }
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
@@ -96,7 +98,7 @@ namespace EinrichtungsStatistik
                 if (MessageBox.Show("Der aktuelle Fragebogen enthält ungesicherte Änderungen.\nMöchten Sie ihn vorher speichern?",
                     "Fragebogen speichern", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    appData.getFrageboegen().Add(tmpFragebogen);
+                    appData.appFrageboegen.Add(tmpFragebogen);
                     saveData();
                 }
             }
@@ -111,12 +113,12 @@ namespace EinrichtungsStatistik
             // Only if Result OK
             if (dlgNeueFrage.DialogResult.HasValue && dlgNeueFrage.DialogResult.Value)
             {
-                foreach (Frage item in appData.getFragen())
+                foreach (Frage item in appData.appFragen)
                 {
-                    if (String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) > -1 &&
-                        String.Compare(item.getFragetext(), dlgNeueFrage.getFrage().getFragetext(), true) < 1)
+                    if (String.Compare(item.strFragetext, dlgNeueFrage.getFrage().strFragetext, true) > -1 &&
+                        String.Compare(item.strFragetext, dlgNeueFrage.getFrage().strFragetext, true) < 1)
                     {
-                        if (MessageBox.Show("Die eingegebene Frage hat Ähnlichkeit mit folgender Frage:\n\n" + item.getFragetext() + "\n\n" + "Möchten Sie die Frage dennoch speichern?",
+                        if (MessageBox.Show("Die eingegebene Frage hat Ähnlichkeit mit folgender Frage:\n\n" + item.strFragetext + "\n\n" + "Möchten Sie die Frage dennoch speichern?",
                             "Frage bereits vorhanden", MessageBoxButton.YesNo) == MessageBoxResult.No)
                             return;
                     }
@@ -126,7 +128,7 @@ namespace EinrichtungsStatistik
             appData.addFrage(dlgNeueFrage.getFrage());
 
             /* Überprüfung der Eingabe
-            MessageBox.Show(dlgNeueFrage.getFrage().getFragetext(), "Eingegebene Frage", MessageBoxButton.OK);*/
+            MessageBox.Show(dlgNeueFrage.getFrage().strFragetext, "Eingegebene Frage", MessageBoxButton.OK);*/
 
             saveData();
             refreshLists();
@@ -157,9 +159,9 @@ namespace EinrichtungsStatistik
                     return;
                 else
                 {
-                    foreach (Frage item in appData.getFragen())
+                    foreach (Frage item in appData.appFragen)
                     {
-                        if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
+                        if (String.Compare(item.strFragetext, listViewFragen.SelectedItem.ToString(), true) == 0)
                         {
                             appData.deleteFrage(item);
                             listViewFragen.Items.Remove(listViewFragen.SelectedItem.ToString());
@@ -176,21 +178,21 @@ namespace EinrichtungsStatistik
         {
             NeueFrage dlgFrageBearbeiten = new NeueFrage();
 
-            foreach (Frage item in appData.getFragen())
+            foreach (Frage item in appData.appFragen)
             {
-                if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
+                if (String.Compare(item.strFragetext, listViewFragen.SelectedItem.ToString(), true) == 0)
                 {
                     dlgFrageBearbeiten.setFrage(item);
                     dlgFrageBearbeiten.ShowDialog();
 
                     if (dlgFrageBearbeiten.DialogResult.HasValue && dlgFrageBearbeiten.DialogResult.Value)
                     {
-                        if (MessageBox.Show("Möchten Sie die Frage:\n\n" + item.getFragetext() + "\n\n" + "wirklich ändern in:\n\n" +
-                            dlgFrageBearbeiten.getFrage().getFragetext(), "Frage ändern", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                        if (MessageBox.Show("Möchten Sie die Frage:\n\n" + item.strFragetext + "\n\n" + "wirklich ändern in:\n\n" +
+                            dlgFrageBearbeiten.getFrage().strFragetext, "Frage ändern", MessageBoxButton.YesNo) == MessageBoxResult.No)
                             return;
                     }
-                    item.setFragetext(dlgFrageBearbeiten.getFrage().getFragetext());
-                    item.setAntwortart(dlgFrageBearbeiten.getFrage().getAntwortart());
+                    item.strFragetext = dlgFrageBearbeiten.getFrage().strFragetext;
+                    item.nAntwortart = dlgFrageBearbeiten.getFrage().nAntwortart;
                     saveData();
                     refreshLists();
                     break;
@@ -200,15 +202,15 @@ namespace EinrichtungsStatistik
 
         private void buttonArrowLeft_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Frage item in appData.getFragen())
+            foreach (Frage item in appData.appFragen)
             {
-                if (String.Compare(item.getFragetext(), listViewFragen.SelectedItem.ToString(), true) == 0)
+                if (String.Compare(item.strFragetext, listViewFragen.SelectedItem.ToString(), true) == 0)
                 {
-                    tmpFragebogen.getFragen().Add(item);
+                    tmpFragebogen.Fragen.Add(item);
                     // Hier wird die hinzugefügte Frage aus der listView entfernt
                     listViewFragen.Items.RemoveAt(listViewFragen.SelectedIndex);
                     refreshLists();
-                    MessageBox.Show("Die Frage:\n\n" + item.getFragetext() + "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
+                    MessageBox.Show("Die Frage:\n\n" + item.strFragetext + "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
                     buttonArrowLeft.IsEnabled = false;
                     if (!buttonSpeichern.IsEnabled)
                         buttonSpeichern.IsEnabled = true;
@@ -221,12 +223,12 @@ namespace EinrichtungsStatistik
         private void buttonSpeichern_Click(object sender, RoutedEventArgs e)
         {
             // <-- ToDo ÜBERARBEITEN -->
-            if (MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.getName() + "\n\n" + "enthält keine Fragen.\n\n" +
+            if (MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.strName + "\n\n" + "enthält keine Fragen.\n\n" +
                 "Möchten Sie ihn trotzdem speichern?", "Frage speichern", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                appData.getFrageboegen().Add(tmpFragebogen);
+                appData.appFrageboegen.Add(tmpFragebogen);
                 saveData();
-                MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.getName() + "\n\nwurde gespeichert.", "Frage gespeichert", MessageBoxButton.OK);
+                MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.strName + "\n\nwurde gespeichert.", "Frage gespeichert", MessageBoxButton.OK);
             }
         }
 

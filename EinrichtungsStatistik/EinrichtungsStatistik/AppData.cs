@@ -10,55 +10,24 @@ namespace EinrichtungsStatistik
     [Serializable]
     class AppData
     {
-        private ArrayList Frageboegen;
-        private ArrayList Fragen;
+        public List<Fragebogen> appFrageboegen { get; set; }
+        public List<Frage> appFragen { get; set; }
 
         public AppData()
         {
-            Frageboegen = new ArrayList();
-            Fragen = new ArrayList();
+            appFrageboegen = new List<Fragebogen>();
+            appFragen = new List<Frage>();
         }
 
-        public AppData(ArrayList frageboegen, ArrayList fragen)
-        {
-            Frageboegen = frageboegen;
-            Fragen = fragen;
-        }
-
-        internal ArrayList getFrageboegen()
-        {
-            return Frageboegen;
-        }
-
-        internal void setFrageboegen(ArrayList frageboegen)
-        {
-            Frageboegen = frageboegen;
-        }
-
-        internal int getFrageboegenCount()
-        {
-            return Frageboegen.Count;
-        }
-
-        internal ArrayList getFragen()
-        {
-            return Fragen;
-        }
-
-        internal void setFragen(ArrayList fragen)
-        {
-            Fragen = fragen;
-        }
-
-        internal void addFrage(Frage frage)
+        public void addFrage(Frage frage)
         {
             if (frage != null)
-                Fragen.Add(frage);
+                appFragen.Add(frage);
         }
 
-        internal void deleteFrage(Frage frage)
+        public void deleteFrage(Frage frage)
         {
-            Fragen.Remove(frage);
+            appFragen.Remove(frage);
         }
     }
 }

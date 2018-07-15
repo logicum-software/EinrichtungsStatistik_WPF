@@ -10,8 +10,8 @@ namespace EinrichtungsStatistik
     [Serializable]
     class Fragebogen
     {
-        private String strName;
-        private ArrayList Fragen;
+        public String strName { get; set; }
+        public ArrayList Fragen { get; set; }
 
         public Fragebogen()
         {
@@ -23,26 +23,6 @@ namespace EinrichtungsStatistik
         {
             strName = name;
             Fragen = new ArrayList(fragen);
-        }
-
-        internal String getName()
-        {
-            return strName;
-        }
-
-        internal void setName(String name)
-        {
-            strName = name;
-        }
-
-        internal ArrayList getFragen()
-        {
-            return Fragen;
-        }
-
-        internal void setFragen(ArrayList fragen)
-        {
-            Fragen = fragen;
         }
     }
 }

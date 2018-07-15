@@ -9,8 +9,8 @@ namespace EinrichtungsStatistik
     [Serializable]
     class Frage
     {
-        private String strFragetext;
-        private int nAntwortart;
+        public String strFragetext { get; set; }
+        public int nAntwortart { get; set; }
 
         public Frage()
         {
@@ -21,26 +21,6 @@ namespace EinrichtungsStatistik
         public Frage(String fragetext, int antwortart)
         {
             strFragetext = fragetext;
-            nAntwortart = antwortart;
-        }
-
-        internal String getFragetext()
-        {
-            return strFragetext;
-        }
-
-        internal void setFragetext(String fragetext)
-        {
-            strFragetext = fragetext;
-        }
-
-        internal int getAntwortart()
-        {
-            return nAntwortart;
-        }
-
-        internal void setAntwortart(int antwortart)
-        {
             nAntwortart = antwortart;
         }
     }

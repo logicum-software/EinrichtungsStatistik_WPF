@@ -22,7 +22,7 @@
             <ListView x:Name="listViewFragen" Margin="10" SelectionChanged="listViewFragen_SelectionChanged">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
-                        <GridViewColumn/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=strFragetext}" Header="Fragetext" Width="300"/>
                     </GridView>
                 </ListView.View>
             </ListView>
