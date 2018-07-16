@@ -143,7 +143,7 @@ namespace EinrichtungsStatistik
             if (listViewFragen.SelectedItem != null)
             {
                 if (MessageBox.Show("Möchten Sie die folgende Frage wirklich aus dem Fragenkatalog löschen?\n\n\n" + 
-                    appData.appFragen.ElementAt<Frage>(listViewFragen.SelectedIndex).strFragetext +
+                    appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext +
                     "\n\n(Die Frage steht dann nicht mehr zur Verfügung!)", "Frage löschen", MessageBoxButton.YesNo) == MessageBoxResult.No)
                     return;
                 else
@@ -159,7 +159,25 @@ namespace EinrichtungsStatistik
         {
             NeueFrage dlgFrageBearbeiten = new NeueFrage();
 
-            foreach (Frage item in appData.appFragen)
+            dlgFrageBearbeiten.setFrage(appData.appFragen.ElementAt(listViewFragen.SelectedIndex));
+            dlgFrageBearbeiten.ShowDialog();
+
+            if (dlgFrageBearbeiten.DialogResult.HasValue && dlgFrageBearbeiten.DialogResult.Value)
+            {
+                if (MessageBox.Show("Möchten Sie die Frage:\n\n" + appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext +
+                    "\n\n" + "wirklich ändern in:\n\n" + dlgFrageBearbeiten.getFrage().strFragetext,
+                    "Frage ändern", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                    return;
+            }
+            else
+            {
+                appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext = dlgFrageBearbeiten.getFrage().strFragetext;
+                appData.appFragen.ElementAt(listViewFragen.SelectedIndex).nAntwortart = dlgFrageBearbeiten.getFrage().nAntwortart;
+                saveData();
+                //refreshLists();
+            }
+
+            /*foreach (Frage item in appData.appFragen)
             {
                 if (String.Compare(item.strFragetext, listViewFragen.SelectedItem.ToString(), true) == 0)
                 {
@@ -178,7 +196,7 @@ namespace EinrichtungsStatistik
                     refreshLists();
                     break;
                 }
-            }
+            }*/
         }
 
         private void buttonArrowLeft_Click(object sender, RoutedEventArgs e)
