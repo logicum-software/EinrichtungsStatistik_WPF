@@ -169,13 +169,10 @@ namespace EinrichtungsStatistik
                     "Frage ändern", MessageBoxButton.YesNo) == MessageBoxResult.No)
                     return;
             }
-            else
-            {
-                appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext = dlgFrageBearbeiten.getFrage().strFragetext;
-                appData.appFragen.ElementAt(listViewFragen.SelectedIndex).nAntwortart = dlgFrageBearbeiten.getFrage().nAntwortart;
-                saveData();
-                //refreshLists();
-            }
+            appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext = dlgFrageBearbeiten.getFrage().strFragetext;
+            appData.appFragen.ElementAt(listViewFragen.SelectedIndex).nAntwortart = dlgFrageBearbeiten.getFrage().nAntwortart;
+            saveData();
+            refreshLists();
 
             /*foreach (Frage item in appData.appFragen)
             {
