@@ -4,16 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace EinrichtungsStatistik
 {
@@ -32,8 +24,6 @@ namespace EinrichtungsStatistik
             loadData();
             tmpFragebogen = new Fragebogen("Fragebogen " + (appData.appFrageboegen.Count + 1), new List<Frage>());
             textBoxFragebogenName.Text = tmpFragebogen.strName;
-            listViewFragen.ItemsSource = tmpFragen;
-            listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
 
             foreach (Frage item in appData.appFragen)
             {
@@ -41,6 +31,8 @@ namespace EinrichtungsStatistik
                     tmpFragen.Add(item);
             }
 
+            listViewFragen.ItemsSource = tmpFragen;
+            listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
             refreshLists();
         }
 
