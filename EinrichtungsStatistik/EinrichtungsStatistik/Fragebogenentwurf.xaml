@@ -13,7 +13,7 @@
             <ListView x:Name="listViewEnthalteneFragen" Margin="10,10,10,11" SelectionChanged="listViewEnthalteneFragen_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=strFragetext}" Header="Fragetext" Width="291"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -31,8 +31,8 @@
         <Button x:Name="buttonNeueFrage" Content="Neue Frage" HorizontalAlignment="Left" Margin="434,429,0,0" VerticalAlignment="Top" Width="100" Click="buttonNeueFrage_Click"/>
         <Button x:Name="buttonFrageBearbeiten" Content="Frage bearbeiten" HorizontalAlignment="Left" Margin="551,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageBearbeiten_Click"/>
         <Button x:Name="buttonFrageLoeschen" Content="Frage löschen" HorizontalAlignment="Left" Margin="667,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageLoeschen_Click"/>
-        <Button Content="Fragebogen auswählen" HorizontalAlignment="Left" Margin="559,23,0,0" VerticalAlignment="Top" Width="140"/>
-        <Button Content="Neuer Fragebogen" HorizontalAlignment="Left" Margin="434,23,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Fragebogen auswählen" HorizontalAlignment="Left" Margin="627,24,0,0" VerticalAlignment="Top" Width="140"/>
+        <Button Content="Formular zurücksetzen" HorizontalAlignment="Left" Margin="434,24,0,0" VerticalAlignment="Top" Width="140"/>
         <Button x:Name="buttonSpeichern" Content="Änderungen speichern" HorizontalAlignment="Left" Margin="25,429,0,0" VerticalAlignment="Top" Width="149" IsEnabled="False" Click="buttonSpeichern_Click"/>
         <Button x:Name="buttonArrowLeft" Content="&lt;-" HorizontalAlignment="Left" Margin="396,200,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowLeft_Click"/>
         <Button x:Name="buttonArrowRight" Content="-&gt;" HorizontalAlignment="Left" Margin="396,280,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowRight_Click"/>

@@ -24,13 +24,23 @@ namespace EinrichtungsStatistik
     {
         private AppData appData;
         private Fragebogen tmpFragebogen;
+        private List<Frage> tmpFragen = new List<Frage>();
 
         public Fragebogenentwurf()
         {
             InitializeComponent();
             loadData();
-            tmpFragebogen = new Fragebogen("Fragebogen " + (appData.appFrageboegen.Count + 1), new System.Collections.ArrayList());
+            tmpFragebogen = new Fragebogen("Fragebogen " + (appData.appFrageboegen.Count + 1), new List<Frage>());
             textBoxFragebogenName.Text = tmpFragebogen.strName;
+            listViewFragen.ItemsSource = tmpFragen;
+            listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
+
+            foreach (Frage item in appData.appFragen)
+            {
+                if (!tmpFragebogen.Fragen.Contains(item))
+                    tmpFragen.Add(item);
+            }
+
             refreshLists();
         }
 
@@ -76,10 +86,8 @@ namespace EinrichtungsStatistik
 
         private void refreshLists()
         {
-            if (listViewFragen.ItemsSource == null)
-                listViewFragen.ItemsSource = appData.appFragen;
-            else
-                listViewFragen.Items.Refresh();
+            listViewFragen.Items.Refresh();
+            listViewEnthalteneFragen.Items.Refresh();
         }
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
@@ -173,32 +181,19 @@ namespace EinrichtungsStatistik
             appData.appFragen.ElementAt(listViewFragen.SelectedIndex).nAntwortart = dlgFrageBearbeiten.getFrage().nAntwortart;
             saveData();
             refreshLists();
-
-            /*foreach (Frage item in appData.appFragen)
-            {
-                if (String.Compare(item.strFragetext, listViewFragen.SelectedItem.ToString(), true) == 0)
-                {
-                    dlgFrageBearbeiten.setFrage(item);
-                    dlgFrageBearbeiten.ShowDialog();
-
-                    if (dlgFrageBearbeiten.DialogResult.HasValue && dlgFrageBearbeiten.DialogResult.Value)
-                    {
-                        if (MessageBox.Show("Möchten Sie die Frage:\n\n" + item.strFragetext + "\n\n" + "wirklich ändern in:\n\n" +
-                            dlgFrageBearbeiten.getFrage().strFragetext, "Frage ändern", MessageBoxButton.YesNo) == MessageBoxResult.No)
-                            return;
-                    }
-                    item.strFragetext = dlgFrageBearbeiten.getFrage().strFragetext;
-                    item.nAntwortart = dlgFrageBearbeiten.getFrage().nAntwortart;
-                    saveData();
-                    refreshLists();
-                    break;
-                }
-            }*/
         }
 
         private void buttonArrowLeft_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Frage item in appData.appFragen)
+            if (listViewFragen.SelectedItem != null)
+            {
+                tmpFragebogen.Fragen.Add(appData.appFragen.ElementAt(listViewFragen.SelectedIndex));
+                tmpFragen.RemoveAt(listViewFragen.SelectedIndex);
+                MessageBox.Show("Die Frage:\n\n" + appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext +
+                    "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
+                refreshLists();
+            }
+            /*foreach (Frage item in appData.appFragen)
             {
                 if (String.Compare(item.strFragetext, listViewFragen.SelectedItem.ToString(), true) == 0)
                 {
@@ -213,7 +208,7 @@ namespace EinrichtungsStatistik
 
                     return;
                 }
-            }
+            }*/
         }
 
         private void buttonSpeichern_Click(object sender, RoutedEventArgs e)

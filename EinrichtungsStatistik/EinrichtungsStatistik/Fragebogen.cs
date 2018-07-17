@@ -11,18 +11,18 @@ namespace EinrichtungsStatistik
     class Fragebogen
     {
         public String strName { get; set; }
-        public ArrayList Fragen { get; set; }
+        public List<Frage> Fragen { get; set; }
 
         public Fragebogen()
         {
             strName = "";
-            Fragen = new ArrayList();
+            Fragen = new List<Frage>();
         }
 
-        public Fragebogen(String name, ArrayList fragen)
+        public Fragebogen(String name, List<Frage> fragen)
         {
             strName = name;
-            Fragen = new ArrayList(fragen);
+            Fragen = new List<Frage>(fragen);
         }
     }
 }
