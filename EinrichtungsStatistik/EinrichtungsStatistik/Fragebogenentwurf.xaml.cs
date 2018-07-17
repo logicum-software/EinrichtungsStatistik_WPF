@@ -159,12 +159,12 @@ namespace EinrichtungsStatistik
         {
             NeueFrage dlgFrageBearbeiten = new NeueFrage();
 
-            dlgFrageBearbeiten.setFrage(appData.appFragen.ElementAt(listViewFragen.SelectedIndex));
+            dlgFrageBearbeiten.setFrage(tmpFragen.ElementAt(listViewFragen.SelectedIndex));
             dlgFrageBearbeiten.ShowDialog();
 
             if (dlgFrageBearbeiten.DialogResult.HasValue && dlgFrageBearbeiten.DialogResult.Value)
             {
-                if (MessageBox.Show("Möchten Sie die Frage:\n\n" + appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext +
+                if (MessageBox.Show("Möchten Sie die Frage:\n\n" + tmpFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext +
                     "\n\n" + "wirklich ändern in:\n\n" + dlgFrageBearbeiten.getFrage().strFragetext,
                     "Frage ändern", MessageBoxButton.YesNo) == MessageBoxResult.No)
                     return;
@@ -179,28 +179,12 @@ namespace EinrichtungsStatistik
         {
             if (listViewFragen.SelectedItem != null)
             {
-                tmpFragebogen.Fragen.Add(appData.appFragen.ElementAt(listViewFragen.SelectedIndex));
-                tmpFragen.RemoveAt(listViewFragen.SelectedIndex);
-                MessageBox.Show("Die Frage:\n\n" + appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext +
+                tmpFragebogen.Fragen.Add(tmpFragen.ElementAt(listViewFragen.SelectedIndex));
+                MessageBox.Show("Die Frage:\n\n" + tmpFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext +
                     "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
+                tmpFragen.RemoveAt(listViewFragen.SelectedIndex);
                 refreshLists();
             }
-            /*foreach (Frage item in appData.appFragen)
-            {
-                if (String.Compare(item.strFragetext, listViewFragen.SelectedItem.ToString(), true) == 0)
-                {
-                    tmpFragebogen.Fragen.Add(item);
-                    // Hier wird die hinzugefügte Frage aus der listView entfernt
-                    listViewFragen.Items.RemoveAt(listViewFragen.SelectedIndex);
-                    refreshLists();
-                    MessageBox.Show("Die Frage:\n\n" + item.strFragetext + "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
-                    buttonArrowLeft.IsEnabled = false;
-                    if (!buttonSpeichern.IsEnabled)
-                        buttonSpeichern.IsEnabled = true;
-
-                    return;
-                }
-            }*/
         }
 
         private void buttonSpeichern_Click(object sender, RoutedEventArgs e)
