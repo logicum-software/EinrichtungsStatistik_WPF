@@ -86,6 +86,7 @@ namespace EinrichtungsStatistik
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
         {
+            // <-- Was wenn bereits gespeichert ? -->
             if (listViewEnthalteneFragen.Items.Count > 0)
             {
                 if (MessageBox.Show("Der aktuelle Fragebogen enthält ungesicherte Änderungen.\nMöchten Sie ihn vorher speichern?",
@@ -125,6 +126,8 @@ namespace EinrichtungsStatistik
 
         private void listViewFragen_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            listViewEnthalteneFragen.SelectedItem = null;
+
             if (listViewFragen.SelectedItem != null )
             {
                 buttonFrageLoeschen.IsEnabled = true;
@@ -160,19 +163,34 @@ namespace EinrichtungsStatistik
         private void buttonFrageBearbeiten_Click(object sender, RoutedEventArgs e)
         {
             NeueFrage dlgFrageBearbeiten = new NeueFrage();
+            Frage tmpFrage = new Frage();
 
-            dlgFrageBearbeiten.setFrage(tmpFragen.ElementAt(listViewFragen.SelectedIndex));
+            if (listViewEnthalteneFragen.SelectedItem == null)
+                tmpFrage = tmpFragen.ElementAt(listViewFragen.SelectedIndex);
+            else
+                tmpFrage = tmpFragebogen.Fragen.ElementAt(listViewEnthalteneFragen.SelectedIndex);
+
+            dlgFrageBearbeiten.setFrage(tmpFrage);
             dlgFrageBearbeiten.ShowDialog();
 
             if (dlgFrageBearbeiten.DialogResult.HasValue && dlgFrageBearbeiten.DialogResult.Value)
             {
-                if (MessageBox.Show("Möchten Sie die Frage:\n\n" + tmpFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext +
+                if (MessageBox.Show("Möchten Sie die Frage:\n\n" + tmpFrage.strFragetext +
                     "\n\n" + "wirklich ändern in:\n\n" + dlgFrageBearbeiten.getFrage().strFragetext,
                     "Frage ändern", MessageBoxButton.YesNo) == MessageBoxResult.No)
                     return;
             }
-            appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext = dlgFrageBearbeiten.getFrage().strFragetext;
-            appData.appFragen.ElementAt(listViewFragen.SelectedIndex).nAntwortart = dlgFrageBearbeiten.getFrage().nAntwortart;
+
+            if (listViewEnthalteneFragen.SelectedItem == null)
+            {
+                appData.appFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext = dlgFrageBearbeiten.getFrage().strFragetext;
+                appData.appFragen.ElementAt(listViewFragen.SelectedIndex).nAntwortart = dlgFrageBearbeiten.getFrage().nAntwortart;
+            }
+            else
+            {
+                appData.appFragen.ElementAt(listViewEnthalteneFragen.SelectedIndex).strFragetext = dlgFrageBearbeiten.getFrage().strFragetext;
+                appData.appFragen.ElementAt(listViewEnthalteneFragen.SelectedIndex).nAntwortart = dlgFrageBearbeiten.getFrage().nAntwortart;
+            }
             saveData();
             refreshLists();
         }
@@ -193,26 +211,33 @@ namespace EinrichtungsStatistik
         private void buttonSpeichern_Click(object sender, RoutedEventArgs e)
         {
             // <-- ToDo ÜBERARBEITEN -->
-            if (MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.strName + "\n\n" + "enthält keine Fragen.\n\n" +
-                "Möchten Sie ihn trotzdem speichern?", "Frage speichern", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (tmpFragebogen.Fragen.Count < 1)
             {
-                appData.appFrageboegen.Add(tmpFragebogen);
-                saveData();
-                MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.strName + "\n\nwurde gespeichert.", "Frage gespeichert", MessageBoxButton.OK);
+                if (MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.strName + "\n\n" + "enthält keine Fragen.\n\n" +
+                    "Möchten Sie ihn trotzdem speichern?", "Frage speichern", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                    return;
             }
+
+            appData.appFrageboegen.Add(tmpFragebogen);
+            saveData();
+            MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.strName + "\n\nwurde gespeichert.", "Frage gespeichert", MessageBoxButton.OK);
         }
 
         private void listViewEnthalteneFragen_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            listViewFragen.SelectedItem = null;
+
             if (listViewEnthalteneFragen.SelectedItem != null )
             {
                 buttonArrowRight.IsEnabled = true;
-                buttonFrageLoeschen.IsEnabled = false;
-                buttonFrageBearbeiten.IsEnabled = false;
+                buttonFrageLoeschen.IsEnabled = true;
+                buttonFrageBearbeiten.IsEnabled = true;
                 buttonArrowLeft.IsEnabled = false;
             }
             else
             {
+                buttonFrageLoeschen.IsEnabled = false;
+                buttonFrageBearbeiten.IsEnabled = false;
                 buttonArrowRight.IsEnabled = false;
             }
         }
