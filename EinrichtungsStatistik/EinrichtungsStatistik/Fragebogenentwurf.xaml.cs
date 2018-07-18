@@ -204,7 +204,7 @@ namespace EinrichtungsStatistik
 
         private void listViewEnthalteneFragen_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listViewEnthalteneFragen.SelectedItem != null)
+            if (listViewEnthalteneFragen.SelectedItem != null )
             {
                 buttonArrowRight.IsEnabled = true;
                 buttonFrageLoeschen.IsEnabled = false;
