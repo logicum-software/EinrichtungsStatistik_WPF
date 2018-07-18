@@ -219,7 +219,15 @@ namespace EinrichtungsStatistik
 
         private void buttonArrowRight_Click(object sender, RoutedEventArgs e)
         {
-
+            if (listViewEnthalteneFragen.SelectedItem != null)
+            {
+                tmpFragen.Add(tmpFragebogen.Fragen.ElementAt(listViewEnthalteneFragen.SelectedIndex));
+                MessageBox.Show("Die Frage:\n\n" + tmpFragebogen.Fragen.ElementAt(listViewEnthalteneFragen.SelectedIndex).strFragetext +
+                    "\n\nwurde aus dem Fragebogen entfernt.", "Frage entfernt", MessageBoxButton.OK);
+                tmpFragebogen.Fragen.Remove(tmpFragebogen.Fragen.ElementAt(listViewEnthalteneFragen.SelectedIndex));
+                refreshLists();
+                buttonArrowRight.IsEnabled = false;
+            }
         }
     }
 }
