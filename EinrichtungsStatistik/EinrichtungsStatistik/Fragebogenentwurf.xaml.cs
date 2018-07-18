@@ -25,12 +25,6 @@ namespace EinrichtungsStatistik
             tmpFragebogen = new Fragebogen("Fragebogen " + (appData.appFrageboegen.Count + 1), new List<Frage>());
             textBoxFragebogenName.Text = tmpFragebogen.strName;
 
-            foreach (Frage item in appData.appFragen)
-            {
-                if (!tmpFragebogen.Fragen.Contains(item))
-                    tmpFragen.Add(item);
-            }
-
             listViewFragen.ItemsSource = tmpFragen;
             listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
             refreshLists();
@@ -78,6 +72,14 @@ namespace EinrichtungsStatistik
 
         private void refreshLists()
         {
+            tmpFragen.Clear();
+
+            foreach (Frage item in appData.appFragen)
+            {
+                if (!tmpFragebogen.Fragen.Contains(item))
+                    tmpFragen.Add(item);
+            }
+
             listViewFragen.Items.Refresh();
             listViewEnthalteneFragen.Items.Refresh();
         }
@@ -184,6 +186,7 @@ namespace EinrichtungsStatistik
                     "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
                 tmpFragen.RemoveAt(listViewFragen.SelectedIndex);
                 refreshLists();
+                buttonArrowLeft.IsEnabled = false;
             }
         }
 
