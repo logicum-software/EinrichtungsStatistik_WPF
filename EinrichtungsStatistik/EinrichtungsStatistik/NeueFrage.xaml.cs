@@ -35,7 +35,7 @@ namespace EinrichtungsStatistik
 
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            this.DialogResult = false;
             this.Close();
         }
 
@@ -60,7 +60,7 @@ namespace EinrichtungsStatistik
 
             tmpFrage = new Frage(textBoxFragetext.Text, i);
 
-            DialogResult = true;
+            this.DialogResult = true;
             this.Close();
         }
     }

@@ -117,11 +117,10 @@ namespace EinrichtungsStatistik
                             return;
                     }
                 }
+                appData.appFragen.Add(dlgNeueFrage.getFrage());
+                saveData();
+                refreshLists();
             }
-
-            appData.appFragen.Add(dlgNeueFrage.getFrage());
-            saveData();
-            refreshLists();
         }
 
         private void listViewFragen_SelectionChanged(object sender, SelectionChangedEventArgs e)
