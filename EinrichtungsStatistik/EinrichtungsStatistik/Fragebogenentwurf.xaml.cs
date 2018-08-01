@@ -17,6 +17,7 @@ namespace EinrichtungsStatistik
         private AppData appData;
         private Fragebogen tmpFragebogen;
         private List<Frage> tmpFragen = new List<Frage>();
+        private Boolean bChanged = false;
 
         public Fragebogenentwurf()
         {
@@ -87,13 +88,14 @@ namespace EinrichtungsStatistik
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
         {
             // <-- Was wenn bereits gespeichert ? -->
-            if (listViewEnthalteneFragen.Items.Count > 0)
+            if (bChanged == true)
             {
                 if (MessageBox.Show("Der aktuelle Fragebogen enthält ungesicherte Änderungen.\nMöchten Sie ihn vorher speichern?",
                     "Fragebogen speichern", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     appData.appFrageboegen.Add(tmpFragebogen);
                     saveData();
+                    bChanged = false;
                 }
             }
             this.Close();
@@ -105,7 +107,7 @@ namespace EinrichtungsStatistik
             dlgNeueFrage.ShowDialog();
 
             // Only if Result OK
-            if (dlgNeueFrage.DialogResult.HasValue && dlgNeueFrage.DialogResult.Value)
+            if (dlgNeueFrage.DialogResult.HasValue && dlgNeueFrage.DialogResult.Value == true)
             {
                 foreach (Frage item in appData.appFragen)
                 {
@@ -201,6 +203,7 @@ namespace EinrichtungsStatistik
                 tmpFragebogen.Fragen.Add(tmpFragen.ElementAt(listViewFragen.SelectedIndex));
                 MessageBox.Show("Die Frage:\n\n" + tmpFragen.ElementAt(listViewFragen.SelectedIndex).strFragetext +
                     "\n\nwurde dem Fragebogen hinzugefügt.", "Frage hinzugefügt", MessageBoxButton.OK);
+                bChanged = true;
                 tmpFragen.RemoveAt(listViewFragen.SelectedIndex);
                 refreshLists();
                 buttonArrowLeft.IsEnabled = false;
@@ -219,6 +222,7 @@ namespace EinrichtungsStatistik
 
             appData.appFrageboegen.Add(tmpFragebogen);
             saveData();
+            bChanged = false;
             MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.strName + "\n\nwurde gespeichert.", "Frage gespeichert", MessageBoxButton.OK);
         }
 
@@ -249,6 +253,7 @@ namespace EinrichtungsStatistik
                 MessageBox.Show("Die Frage:\n\n" + tmpFragebogen.Fragen.ElementAt(listViewEnthalteneFragen.SelectedIndex).strFragetext +
                     "\n\nwurde aus dem Fragebogen entfernt.", "Frage entfernt", MessageBoxButton.OK);
                 tmpFragebogen.Fragen.Remove(tmpFragebogen.Fragen.ElementAt(listViewEnthalteneFragen.SelectedIndex));
+                bChanged = true;
                 refreshLists();
                 buttonArrowRight.IsEnabled = false;
             }
