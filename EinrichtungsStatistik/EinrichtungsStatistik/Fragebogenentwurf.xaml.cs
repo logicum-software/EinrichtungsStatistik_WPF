@@ -273,5 +273,10 @@ namespace EinrichtungsStatistik
                 buttonArrowRight.IsEnabled = false;
             }
         }
+
+        private void buttonLaden_Click(object sender, RoutedEventArgs e)
+        {
+            // <-- ToDo -- Laden implementieren -->
+        }
     }
 }

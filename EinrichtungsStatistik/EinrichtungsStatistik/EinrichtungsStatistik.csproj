@@ -54,6 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Fragebogenauswahl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Fragebogenentwurf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -69,6 +73,9 @@
     <Compile Include="AppData.cs" />
     <Compile Include="Frage.cs" />
     <Compile Include="Fragebogen.cs" />
+    <Compile Include="Fragebogenauswahl.xaml.cs">
+      <DependentUpon>Fragebogenauswahl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fragebogenentwurf.xaml.cs">
       <DependentUpon>Fragebogenentwurf.xaml</DependentUpon>
     </Compile>
