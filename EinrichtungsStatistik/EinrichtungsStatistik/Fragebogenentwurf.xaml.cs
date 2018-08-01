@@ -221,6 +221,20 @@ namespace EinrichtungsStatistik
                     return;
             }
 
+            foreach (Fragebogen item in appData.appFrageboegen)
+            {
+                if (item.strName.Equals(tmpFragebogen.strName))
+                {
+                    item.strName = tmpFragebogen.strName;
+                    item.Fragen = tmpFragebogen.Fragen;
+                    saveData();
+                    bChanged = false;
+                    MessageBox.Show("Die Änderungen im Fragebogen:\n\n" + tmpFragebogen.strName + "\n\nwurden gespeichert.", 
+                        "Änderungen gespeichert", MessageBoxButton.OK);
+                    return;
+                }
+            }
+
             appData.appFrageboegen.Add(tmpFragebogen);
             saveData();
             bChanged = false;
