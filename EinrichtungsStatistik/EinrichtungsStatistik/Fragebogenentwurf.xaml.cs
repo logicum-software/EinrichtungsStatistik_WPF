@@ -213,6 +213,7 @@ namespace EinrichtungsStatistik
         private void buttonSpeichern_Click(object sender, RoutedEventArgs e)
         {
             // <-- ToDo ÜBERARBEITEN  Was, wenn er vorher schon gespeichert wurde? -->
+
             if (tmpFragebogen.Fragen.Count < 1)
             {
                 if (MessageBox.Show("Der Fragebogen:\n\n" + tmpFragebogen.strName + "\n\n" + "enthält keine Fragen.\n\n" +
