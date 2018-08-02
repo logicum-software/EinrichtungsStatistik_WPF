@@ -19,9 +19,26 @@ namespace EinrichtungsStatistik
     /// </summary>
     public partial class Fragebogenauswahl : Window
     {
+        private List<Fragebogen> tmpFrageboegen = new List<Fragebogen>();
+
         public Fragebogenauswahl()
         {
             InitializeComponent();
+
+            listViewAuswahl.ItemsSource = tmpFrageboegen;
+            listViewAuswahl.Items.Refresh();
+        }
+
+        internal void setFrageboegen(List<Fragebogen> frageboegen)
+        {
+            foreach (Fragebogen item in frageboegen)
+                tmpFrageboegen.Add(item);
+        }
+
+        private void buttonAbbrechen_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
         }
     }
 }

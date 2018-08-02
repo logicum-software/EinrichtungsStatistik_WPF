@@ -277,6 +277,10 @@ namespace EinrichtungsStatistik
         private void buttonLaden_Click(object sender, RoutedEventArgs e)
         {
             // <-- ToDo -- Laden implementieren -->
+            Fragebogenauswahl dlgAuswahl = new Fragebogenauswahl();
+
+            dlgAuswahl.setFrageboegen(appData.appFrageboegen);
+            dlgAuswahl.ShowDialog();
         }
     }
 }
