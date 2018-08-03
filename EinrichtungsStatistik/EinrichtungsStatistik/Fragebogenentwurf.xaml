@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EinrichtungsStatistik"
         mc:Ignorable="d"
-        Title="Fragebogenentwurf" Height="550" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Fragebogenentwurf" Height="550" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid>
         <Label Content="Ausgewählter Fragebogen" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxFragebogenName" HorizontalAlignment="Left" Height="23" Margin="179,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
@@ -18,7 +18,7 @@
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <GroupBox Header="Fragenkatalog" HorizontalAlignment="Left" Height="350" Margin="434,74,0,0" VerticalAlignment="Top" Width="333">
+        <GroupBox Header="Fragenkatalog" Height="350" Margin="434,74,27,0" VerticalAlignment="Top">
             <ListView x:Name="listViewFragen" Margin="10" SelectionChanged="listViewFragen_SelectionChanged" UseLayoutRounding="True">
                 <ListView.View>
                     <GridView x:Name="gridViewFragen">
@@ -27,7 +27,7 @@
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <Button x:Name="buttonSchliessen" Content="Schliessen" Margin="0,0,27,10" Click="buttonSchliessen_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <Button x:Name="buttonSchliessen" Content="Schliessen" Margin="0,491,10,10" Click="buttonSchliessen_Click" HorizontalAlignment="Right" Width="75"/>
         <Button x:Name="buttonNeueFrage" Content="Neue Frage" HorizontalAlignment="Left" Margin="434,429,0,0" VerticalAlignment="Top" Width="100" Click="buttonNeueFrage_Click"/>
         <Button x:Name="buttonFrageBearbeiten" Content="Frage bearbeiten" HorizontalAlignment="Left" Margin="551,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageBearbeiten_Click"/>
         <Button x:Name="buttonFrageLoeschen" Content="Frage löschen" HorizontalAlignment="Left" Margin="667,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageLoeschen_Click"/>

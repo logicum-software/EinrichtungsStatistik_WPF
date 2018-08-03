@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EinrichtungsStatistik"
         mc:Ignorable="d"
-        Title="Fragebogenauswahl" Height="450" Width="497.321" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Fragebogenauswahl" Height="450" Width="497.321" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
     <Grid>
         <Label x:Name="label" Content="Bitte wählen sie einen Fragebogen aus:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="listViewAuswahl" HorizontalAlignment="Left" Height="307" Margin="10,36,0,0" VerticalAlignment="Top" Width="469">
+        <ListView x:Name="listViewAuswahl" HorizontalAlignment="Left" Height="307" Margin="10,36,10,0" VerticalAlignment="Top" Width="469" SelectionChanged="listViewAuswahl_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=strName}" Header="Name" Width="291"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="buttonLaden" Content="Laden" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
-        <Button x:Name="buttonAbbrechen" Content="Abbrechen" HorizontalAlignment="Left" Margin="404,366,0,0" VerticalAlignment="Top" Width="75" Click="buttonAbbrechen_Click"/>
+        <Button x:Name="buttonLaden" Content="Laden" HorizontalAlignment="Left" Margin="10,366,0,10" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="buttonLaden_Click"/>
+        <Button x:Name="buttonAbbrechen" Content="Abbrechen" HorizontalAlignment="Left" Margin="404,366,10,10" VerticalAlignment="Top" Width="75" Click="buttonAbbrechen_Click"/>
     </Grid>
 </Window>

@@ -20,6 +20,7 @@ namespace EinrichtungsStatistik
     public partial class Fragebogenauswahl : Window
     {
         private List<Fragebogen> tmpFrageboegen = new List<Fragebogen>();
+        private Fragebogen tmpFragebogen;
 
         public Fragebogenauswahl()
         {
@@ -35,9 +36,33 @@ namespace EinrichtungsStatistik
                 tmpFrageboegen.Add(item);
         }
 
+        internal Fragebogen getFragebogen()
+        {
+            return tmpFragebogen;
+        }
+
         private void buttonAbbrechen_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
+            this.Close();
+        }
+
+        private void listViewAuswahl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listViewAuswahl.SelectedItem != null)
+                buttonLaden.IsEnabled = true;
+            else
+                buttonLaden.IsEnabled = false;
+        }
+
+        private void buttonLaden_Click(object sender, RoutedEventArgs e)
+        {
+            if (listViewAuswahl.SelectedItem != null)
+            {
+                tmpFragebogen = new Fragebogen(tmpFrageboegen.ElementAt(listViewAuswahl.SelectedIndex).strName,
+                tmpFrageboegen.ElementAt(listViewAuswahl.SelectedIndex).Fragen);
+            }
+
             this.Close();
         }
     }
