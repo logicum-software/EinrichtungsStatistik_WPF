@@ -277,7 +277,6 @@ namespace EinrichtungsStatistik
 
         private void buttonLaden_Click(object sender, RoutedEventArgs e)
         {
-            // <-- ToDo -- Laden implementieren -->
             Fragebogenauswahl dlgAuswahl = new Fragebogenauswahl();
 
             dlgAuswahl.setFrageboegen(appData.appFrageboegen);
@@ -287,6 +286,27 @@ namespace EinrichtungsStatistik
             {
                 tmpFragebogen = dlgAuswahl.getFragebogen();
                 listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
+                refreshLists();
+            }
+        }
+
+        private void buttonLoeschen_Click(object sender, RoutedEventArgs e)
+        {
+            Fragebogenauswahl dlgLoeschen = new Fragebogenauswahl();
+
+            dlgLoeschen.setFrageboegen(appData.appFrageboegen);
+            dlgLoeschen.ShowDialog();
+
+            if (dlgLoeschen.DialogResult == true)
+            {
+                foreach (Fragebogen item in appData.appFrageboegen)
+                {
+                    if (item.strName.Equals(dlgLoeschen.getFragebogen().strName))
+                    {
+                        appData.appFrageboegen.Remove(item);
+                    }
+                }
+                saveData();
                 refreshLists();
             }
         }
