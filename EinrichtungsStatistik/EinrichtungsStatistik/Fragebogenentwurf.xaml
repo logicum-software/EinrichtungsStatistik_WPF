@@ -36,5 +36,6 @@
         <Button x:Name="buttonSpeichern" Content="Speichern" HorizontalAlignment="Left" Margin="25,429,0,0" VerticalAlignment="Top" Width="80" Click="buttonSpeichern_Click"/>
         <Button x:Name="buttonArrowLeft" Content="&lt;-" HorizontalAlignment="Left" Margin="396,200,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowLeft_Click"/>
         <Button x:Name="buttonArrowRight" Content="-&gt;" HorizontalAlignment="Left" Margin="396,280,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowRight_Click"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="304,429,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

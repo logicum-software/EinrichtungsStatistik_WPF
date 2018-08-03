@@ -83,6 +83,7 @@ namespace EinrichtungsStatistik
 
             listViewFragen.Items.Refresh();
             listViewEnthalteneFragen.Items.Refresh();
+            textBoxFragebogenName.Text = tmpFragebogen.strName;
         }
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
