@@ -282,9 +282,13 @@ namespace EinrichtungsStatistik
 
             dlgAuswahl.setFrageboegen(appData.appFrageboegen);
             dlgAuswahl.ShowDialog();
-            tmpFragebogen = dlgAuswahl.getFragebogen();
-            listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
-            refreshLists();
+
+            if (dlgAuswahl.DialogResult == true)
+            {
+                tmpFragebogen = dlgAuswahl.getFragebogen();
+                listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
+                refreshLists();
+            }
         }
     }
 }

@@ -61,6 +61,7 @@ namespace EinrichtungsStatistik
             {
                 tmpFragebogen = new Fragebogen(tmpFrageboegen.ElementAt(listViewAuswahl.SelectedIndex).strName,
                 tmpFrageboegen.ElementAt(listViewAuswahl.SelectedIndex).Fragen);
+                DialogResult = true;
             }
 
             this.Close();
