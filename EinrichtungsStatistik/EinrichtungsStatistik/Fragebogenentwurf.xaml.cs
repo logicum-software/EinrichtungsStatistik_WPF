@@ -300,14 +300,36 @@ namespace EinrichtungsStatistik
 
             if (dlgLoeschen.DialogResult == true)
             {
-                foreach (Fragebogen item in appData.appFrageboegen)
+                if (MessageBox.Show("Möchten Sie den folgenden Fragebogen wirklich dauerhaft löschen?\n\n\n" +
+                    dlgLoeschen.getFragebogen().strName, "Frage löschen", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                    return;
+                else
                 {
-                    if (item.strName.Equals(dlgLoeschen.getFragebogen().strName))
+                    Fragebogen itemToRemove = appData.appFrageboegen.SingleOrDefault(r => r.strName.Equals(dlgLoeschen.getFragebogen().strName));
+                    if (itemToRemove != null)
+                        appData.appFrageboegen.Remove(itemToRemove);
+
+                    if (tmpFragebogen.strName.Equals(dlgLoeschen.getFragebogen().strName))
                     {
-                        appData.appFrageboegen.Remove(item);
+                        tmpFragebogen = new Fragebogen("Fragebogen " + (appData.appFrageboegen.Count + 1), new List<Frage>());
+                        listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
                     }
+                    saveData();
+                    refreshLists();
                 }
-                saveData();
+            }
+        }
+
+        private void buttonReset_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Möchten Sie den Editor wirklich zurücksetzen?\n\nAlle ungesicherten Änderungen gehen verloren.\n", "Editor zurücksetzen",
+                MessageBoxButton.YesNo) == MessageBoxResult.No)
+                return;
+            else
+            {
+                tmpFragebogen = new Fragebogen("Fragebogen " + (appData.appFrageboegen.Count + 1), new List<Frage>());
+                listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
+                bChanged = false;
                 refreshLists();
             }
         }
