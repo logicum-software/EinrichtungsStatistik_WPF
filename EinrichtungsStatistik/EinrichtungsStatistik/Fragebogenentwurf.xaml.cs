@@ -295,6 +295,7 @@ namespace EinrichtungsStatistik
             Fragebogenauswahl dlgLoeschen = new Fragebogenauswahl();
 
             dlgLoeschen.setFrageboegen(appData.appFrageboegen);
+            dlgLoeschen.buttonLaden.Content = "Löschen";
             dlgLoeschen.ShowDialog();
 
             if (dlgLoeschen.DialogResult == true)
