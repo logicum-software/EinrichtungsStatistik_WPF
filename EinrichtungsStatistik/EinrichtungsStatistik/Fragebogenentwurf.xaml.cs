@@ -23,8 +23,25 @@ namespace EinrichtungsStatistik
         {
             InitializeComponent();
             loadData();
-            tmpFragebogen = new Fragebogen("Fragebogen " + (appData.appFrageboegen.Count + 1), new List<Frage>());
-            textBoxFragebogenName.Text = tmpFragebogen.strName;
+
+            int i = 1;
+            Boolean bFound = true;
+
+            while (bFound)
+            {
+                foreach (Fragebogen item in appData.appFrageboegen)
+                {
+                    if (item.strName.Equals("Fragebogen " + i))
+                    {
+                        i++;
+                        break;
+                    }
+                    else if (i == appData.appFrageboegen.Count + 1)
+                        bFound = false;
+                }
+            }
+
+            tmpFragebogen = new Fragebogen("Fragebogen " + i, new List<Frage>());
 
             listViewFragen.ItemsSource = tmpFragen;
             listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
@@ -327,11 +344,28 @@ namespace EinrichtungsStatistik
                 return;
             else
             {
-                tmpFragebogen = new Fragebogen("Fragebogen " + (appData.appFrageboegen.Count + 1), new List<Frage>());
+                int i = 1;
+                foreach (Fragebogen item in appData.appFrageboegen)
+                {
+                    if (item.strName.Equals("Fragebogen " + appData.appFrageboegen.Count + i))
+                        i++;
+                }
+                tmpFragebogen = new Fragebogen("Fragebogen " + i, new List<Frage>());
                 listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
                 bChanged = false;
                 refreshLists();
             }
+        }
+
+        private void textBoxFragebogenName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tmpFragebogen.strName = textBoxFragebogenName.Text;
+        }
+
+        private void textBoxFragebogenName_Loaded(object sender, RoutedEventArgs e)
+        {
+            textBoxFragebogenName.Focus();
+            textBoxFragebogenName.SelectAll();
         }
     }
 }
