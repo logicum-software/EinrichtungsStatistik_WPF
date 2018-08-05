@@ -25,9 +25,9 @@ namespace EinrichtungsStatistik
             loadData();
 
             int i = 1;
-            Boolean bFound = true;
+            Boolean bFound = false;
 
-            while (bFound)
+            while (!bFound)
             {
                 foreach (Fragebogen item in appData.appFrageboegen)
                 {
@@ -36,8 +36,9 @@ namespace EinrichtungsStatistik
                         i++;
                         break;
                     }
-                    else if (i == appData.appFrageboegen.Count + 1)
-                        bFound = false;
+
+                    if (item.strName.Equals(appData.appFrageboegen[appData.appFrageboegen.Count - 1].strName))
+                        bFound = true;
                 }
             }
 
@@ -345,11 +346,23 @@ namespace EinrichtungsStatistik
             else
             {
                 int i = 1;
-                foreach (Fragebogen item in appData.appFrageboegen)
+                Boolean bFound = false;
+
+                while (!bFound)
                 {
-                    if (item.strName.Equals("Fragebogen " + appData.appFrageboegen.Count + i))
-                        i++;
+                    foreach (Fragebogen item in appData.appFrageboegen)
+                    {
+                        if (item.strName.Equals("Fragebogen " + i))
+                        {
+                            i++;
+                            break;
+                        }
+
+                        if (item.strName.Equals(appData.appFrageboegen[appData.appFrageboegen.Count - 1].strName))
+                            bFound = true;
+                    }
                 }
+
                 tmpFragebogen = new Fragebogen("Fragebogen " + i, new List<Frage>());
                 listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
                 bChanged = false;
