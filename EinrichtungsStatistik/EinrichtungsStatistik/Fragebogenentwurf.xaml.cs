@@ -109,7 +109,6 @@ namespace EinrichtungsStatistik
 
         private void buttonSchliessen_Click(object sender, RoutedEventArgs e)
         {
-            // <-- Was wenn bereits gespeichert ? -->
             if (bChanged == true)
             {
                 if (MessageBox.Show("Der aktuelle Fragebogen enthält ungesicherte Änderungen.\nMöchten Sie ihn vorher speichern?",
@@ -351,18 +350,21 @@ namespace EinrichtungsStatistik
                 int i = 1;
                 Boolean bFound = false;
 
-                while (!bFound)
+                if (appData.appFrageboegen.Count > 0)
                 {
-                    foreach (Fragebogen item in appData.appFrageboegen)
+                    while (!bFound)
                     {
-                        if (item.strName.Equals("Fragebogen " + i))
+                        foreach (Fragebogen item in appData.appFrageboegen)
                         {
-                            i++;
-                            break;
-                        }
+                            if (item.strName.Equals("Fragebogen " + i))
+                            {
+                                i++;
+                                break;
+                            }
 
-                        if (item.strName.Equals(appData.appFrageboegen[appData.appFrageboegen.Count - 1].strName))
-                            bFound = true;
+                            if (item.strName.Equals(appData.appFrageboegen[appData.appFrageboegen.Count - 1].strName))
+                                bFound = true;
+                        }
                     }
                 }
 
