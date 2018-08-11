@@ -27,18 +27,21 @@ namespace EinrichtungsStatistik
             int i = 1;
             Boolean bFound = false;
 
-            while (!bFound)
+            if (appData.appFrageboegen.Count > 0)
             {
-                foreach (Fragebogen item in appData.appFrageboegen)
+                while (!bFound)
                 {
-                    if (item.strName.Equals("Fragebogen " + i))
+                    foreach (Fragebogen item in appData.appFrageboegen)
                     {
-                        i++;
-                        break;
-                    }
+                        if (item.strName.Equals("Fragebogen " + i))
+                        {
+                            i++;
+                            break;
+                        }
 
-                    if (item.strName.Equals(appData.appFrageboegen[appData.appFrageboegen.Count - 1].strName))
-                        bFound = true;
+                        if (item.strName.Equals(appData.appFrageboegen[appData.appFrageboegen.Count - 1].strName))
+                            bFound = true;
+                    }
                 }
             }
 
