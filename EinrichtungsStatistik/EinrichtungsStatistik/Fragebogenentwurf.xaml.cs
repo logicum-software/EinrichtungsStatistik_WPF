@@ -114,6 +114,21 @@ namespace EinrichtungsStatistik
                 if (MessageBox.Show("Der aktuelle Fragebogen enthält ungesicherte Änderungen.\nMöchten Sie ihn vorher speichern?",
                     "Fragebogen speichern", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+                    foreach (Fragebogen item in appData.appFrageboegen)
+                    {
+                        if (item.strName.Equals(tmpFragebogen.strName))
+                        {
+                            item.strName = tmpFragebogen.strName;
+                            item.Fragen = tmpFragebogen.Fragen;
+                            saveData();
+                            bChanged = false;
+                            MessageBox.Show("Die Änderungen im Fragebogen:\n\n" + tmpFragebogen.strName + "\n\nwurden gespeichert.",
+                                "Änderungen gespeichert", MessageBoxButton.OK);
+                            this.Close();
+                            return;
+                        }
+                    }
+
                     appData.appFrageboegen.Add(tmpFragebogen);
                     saveData();
                     bChanged = false;
