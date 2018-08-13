@@ -5,37 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EinrichtungsStatistik"
         mc:Ignorable="d"
-        Title="Fragebogenentwurf" Height="550" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+        Title="Fragebogenentwurf" Height="650" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid>
         <Label Content="Ausgewählter Fragebogen" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxFragebogenName" HorizontalAlignment="Left" Height="23" Margin="179,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" TextChanged="textBoxFragebogenName_TextChanged" Loaded="textBoxFragebogenName_Loaded"/>
-        <GroupBox Header="Enthaltene Fragen" HorizontalAlignment="Left" Height="350" Margin="25,74,0,25" VerticalAlignment="Top" Width="354">
+        <GroupBox Header="Enthaltene Fragen" HorizontalAlignment="Left" Height="200" Margin="25,74,25,0" VerticalAlignment="Top" Width="759">
             <ListView x:Name="listViewEnthalteneFragen" Margin="10,10,10,11" SelectionChanged="listViewEnthalteneFragen_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=strFragetext}" Header="Fragetext" Width="291"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=strFragetext}" Header="Fragetext"/>
                     </GridView>
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <GroupBox Header="Fragenkatalog" Height="350" Margin="434,74,27,0" VerticalAlignment="Top">
+        <GroupBox Header="Fragenkatalog" Height="200" Margin="25,320,25,0" VerticalAlignment="Top">
             <ListView x:Name="listViewFragen" Margin="10" SelectionChanged="listViewFragen_SelectionChanged" UseLayoutRounding="True">
                 <ListView.View>
                     <GridView x:Name="gridViewFragen">
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=strFragetext}" Header="Fragetext" Width="291"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=strFragetext}" Header="Fragetext"/>
                     </GridView>
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <Button x:Name="buttonSchliessen" Content="Schliessen" Margin="0,491,10,10" Click="buttonSchliessen_Click" HorizontalAlignment="Right" Width="75"/>
-        <Button x:Name="buttonNeueFrage" Content="Neue Frage" HorizontalAlignment="Left" Margin="434,429,0,0" VerticalAlignment="Top" Width="100" Click="buttonNeueFrage_Click"/>
-        <Button x:Name="buttonFrageBearbeiten" Content="Frage bearbeiten" HorizontalAlignment="Left" Margin="551,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageBearbeiten_Click"/>
-        <Button x:Name="buttonFrageLoeschen" Content="Frage löschen" HorizontalAlignment="Left" Margin="667,429,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageLoeschen_Click"/>
-        <Button x:Name="buttonLaden" Content="Laden" HorizontalAlignment="Left" Margin="110,429,0,0" VerticalAlignment="Top" Width="80" Click="buttonLaden_Click"/>
+        <Button x:Name="buttonSchliessen" Content="Schliessen" Margin="0,591,10,10" Click="buttonSchliessen_Click" HorizontalAlignment="Right" Width="75"/>
+        <Button x:Name="buttonNeueFrage" Content="Neue Frage" HorizontalAlignment="Left" Margin="25,525,0,0" VerticalAlignment="Top" Width="100" Click="buttonNeueFrage_Click"/>
+        <Button x:Name="buttonFrageBearbeiten" Content="Frage bearbeiten" HorizontalAlignment="Left" Margin="130,525,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageBearbeiten_Click"/>
+        <Button x:Name="buttonFrageLoeschen" Content="Frage löschen" HorizontalAlignment="Left" Margin="235,525,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageLoeschen_Click"/>
+        <Button x:Name="buttonLaden" Content="Laden" HorizontalAlignment="Left" Margin="110,280,0,0" VerticalAlignment="Top" Width="80" Click="buttonLaden_Click"/>
         <Button x:Name="buttonReset" Content="Formular zurücksetzen" HorizontalAlignment="Left" Margin="434,24,0,0" VerticalAlignment="Top" Width="140" Click="buttonReset_Click"/>
-        <Button x:Name="buttonSpeichern" Content="Speichern" HorizontalAlignment="Left" Margin="25,429,0,0" VerticalAlignment="Top" Width="80" Click="buttonSpeichern_Click"/>
-        <Button x:Name="buttonArrowLeft" Content="&lt;-" HorizontalAlignment="Left" Margin="396,200,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowLeft_Click"/>
-        <Button x:Name="buttonArrowRight" Content="-&gt;" HorizontalAlignment="Left" Margin="396,280,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowRight_Click"/>
-        <Button x:Name="buttonLoeschen" Content="Löschen" HorizontalAlignment="Left" Margin="304,429,0,0" VerticalAlignment="Top" Width="75" Click="buttonLoeschen_Click"/>
+        <Button x:Name="buttonSpeichern" Content="Speichern" HorizontalAlignment="Left" Margin="25,280,0,0" VerticalAlignment="Top" Width="80" Click="buttonSpeichern_Click"/>
+        <Button x:Name="buttonArrowLeft" Content="Frage hinzufügen" HorizontalAlignment="Left" Margin="453,295,0,0" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowLeft_Click"/>
+        <Button x:Name="buttonArrowRight" Content="Frage entfernen" HorizontalAlignment="Left" Margin="612,295,0,0" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowRight_Click"/>
+        <Button x:Name="buttonLoeschen" Content="Löschen" HorizontalAlignment="Left" Margin="195,280,0,0" VerticalAlignment="Top" Width="75" Click="buttonLoeschen_Click"/>
     </Grid>
 </Window>
