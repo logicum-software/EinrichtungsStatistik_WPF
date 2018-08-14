@@ -400,5 +400,10 @@ namespace EinrichtungsStatistik
             textBoxFragebogenName.Focus();
             textBoxFragebogenName.SelectAll();
         }
+
+        private void buttonKopf_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hallo felix!", "Nachricht", MessageBoxButton.OK);
+        }
     }
 }

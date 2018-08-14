@@ -31,11 +31,14 @@
         <Button x:Name="buttonNeueFrage" Content="Neue Frage" HorizontalAlignment="Left" Margin="25,525,0,0" VerticalAlignment="Top" Width="100" Click="buttonNeueFrage_Click"/>
         <Button x:Name="buttonFrageBearbeiten" Content="Frage bearbeiten" HorizontalAlignment="Left" Margin="130,525,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageBearbeiten_Click"/>
         <Button x:Name="buttonFrageLoeschen" Content="Frage löschen" HorizontalAlignment="Left" Margin="235,525,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonFrageLoeschen_Click"/>
-        <Button x:Name="buttonLaden" Content="Laden" HorizontalAlignment="Left" Margin="110,280,0,0" VerticalAlignment="Top" Width="80" Click="buttonLaden_Click"/>
-        <Button x:Name="buttonReset" Content="Formular zurücksetzen" HorizontalAlignment="Left" Margin="434,24,0,0" VerticalAlignment="Top" Width="140" Click="buttonReset_Click"/>
-        <Button x:Name="buttonSpeichern" Content="Speichern" HorizontalAlignment="Left" Margin="25,280,0,0" VerticalAlignment="Top" Width="80" Click="buttonSpeichern_Click"/>
-        <Button x:Name="buttonArrowLeft" Content="Frage hinzufügen" HorizontalAlignment="Left" Margin="453,295,0,0" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowLeft_Click"/>
-        <Button x:Name="buttonArrowRight" Content="Frage entfernen" HorizontalAlignment="Left" Margin="612,295,0,0" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowRight_Click"/>
-        <Button x:Name="buttonLoeschen" Content="Löschen" HorizontalAlignment="Left" Margin="195,280,0,0" VerticalAlignment="Top" Width="75" Click="buttonLoeschen_Click"/>
+        <Button x:Name="buttonLaden" Content="Laden" HorizontalAlignment="Left" Margin="384,25,0,0" VerticalAlignment="Top" Width="80" Click="buttonLaden_Click"/>
+        <Button x:Name="buttonReset" Content="Formular zurücksetzen" HorizontalAlignment="Left" Margin="634,25,0,0" VerticalAlignment="Top" Width="135" Click="buttonReset_Click"/>
+        <Button x:Name="buttonSpeichern" Content="Speichern" HorizontalAlignment="Left" Margin="469,25,0,0" VerticalAlignment="Top" Width="80" Click="buttonSpeichern_Click"/>
+        <Button x:Name="buttonArrowLeft" Content="Frage hinzufügen" HorizontalAlignment="Left" Margin="544,300,0,0" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowLeft_Click"/>
+        <Button x:Name="buttonArrowRight" Content="Frage entfernen" HorizontalAlignment="Left" Margin="659,300,0,0" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.55,2.8" IsEnabled="False" Click="buttonArrowRight_Click"/>
+        <Button x:Name="buttonLoeschen" Content="Löschen" HorizontalAlignment="Left" Margin="554,25,0,0" VerticalAlignment="Top" Width="75" Click="buttonLoeschen_Click"/>
+        <Label x:Name="label" Content="Ausgewählter Kopf:" HorizontalAlignment="Left" Margin="53,279,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="165,283,0,0" VerticalAlignment="Top" Width="200"/>
+        <Button x:Name="button" Content="Kopf bearbeiten" HorizontalAlignment="Left" Margin="370,284,0,0" VerticalAlignment="Top" Width="94"/>
     </Grid>
 </Window>
