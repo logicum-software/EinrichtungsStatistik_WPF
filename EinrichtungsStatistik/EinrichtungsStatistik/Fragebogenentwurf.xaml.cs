@@ -105,6 +105,8 @@ namespace EinrichtungsStatistik
             listViewFragen.Items.Refresh();
             listViewEnthalteneFragen.Items.Refresh();
             textBoxFragebogenName.Text = tmpFragebogen.strName;
+
+            // Spaltenbreite neu anpassen
             listViewEnthalteneFragen.UpdateLayout();
             listViewFragen.UpdateLayout();
         }
