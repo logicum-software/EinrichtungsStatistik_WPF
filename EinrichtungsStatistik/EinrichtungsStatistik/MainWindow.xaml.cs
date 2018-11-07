@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows;
 
 namespace EinrichtungsStatistik
 {
@@ -10,7 +13,35 @@ namespace EinrichtungsStatistik
         public MainWindow()
         {
             InitializeComponent();
-            /*IFormatter formatter = new BinaryFormatter();
+        }
+
+        private void saveData(AppData appData)
+        {
+            FileStream fs = new FileStream("udata.dat", FileMode.Create);
+
+            // Construct a BinaryFormatter and use it to serialize the data to the stream.
+            BinaryFormatter formatter = new BinaryFormatter();
+            try
+            {
+                formatter.Serialize(fs, appData);
+            }
+            catch (SerializationException ec)
+            {
+                MessageBox.Show(ec.Message, "Speicherfehler", MessageBoxButton.OK);
+                //Console.WriteLine("Failed to serialize. Reason: " + ec.Message);
+                throw;
+            }
+            finally
+            {
+                fs.Close();
+            }
+        }
+
+        private AppData loadData()
+        {
+            AppData appData;
+
+            IFormatter formatter = new BinaryFormatter();
             try
             {
                 Stream stream = new FileStream("udata.dat", FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -19,10 +50,12 @@ namespace EinrichtungsStatistik
             }
             catch (FileNotFoundException e)
             {
-                MessageBox.Show("Datei wurde nicht gefunden.\n" + e.Message, "Dateifehler", MessageBoxButton.OK);
+                MessageBox.Show(e.Message, "Dateifehler", MessageBoxButton.OK);
+                appData = new AppData();
                 //Application.Current.Shutdown();
                 //throw;
-            }*/
+            }
+            return appData;
         }
 
         private void buttonBeenden_Click(object sender, RoutedEventArgs e)
@@ -35,8 +68,12 @@ namespace EinrichtungsStatistik
 
         private void buttonFragebogenentwurf_Click(object sender, RoutedEventArgs e)
         {
-            Fragebogenentwurf dlgEntwurf = new Fragebogenentwurf();
-            dlgEntwurf.ShowDialog();
+            Fragebogenauswahl dlgAuswahl = new Fragebogenauswahl();
+
+            dlgAuswahl.setFrageboegen(loadData().appFrageboegen);
+            dlgAuswahl.ShowDialog();
+            /*Fragebogenentwurf dlgEntwurf = new Fragebogenentwurf();
+            dlgEntwurf.ShowDialog();*/
         }
     }
 }
