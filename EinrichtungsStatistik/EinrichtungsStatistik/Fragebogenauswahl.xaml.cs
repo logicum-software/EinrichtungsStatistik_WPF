@@ -66,5 +66,15 @@ namespace EinrichtungsStatistik
 
             this.Close();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        internal void disableNew()
+        {
+            buttonNew.IsEnabled = false;
+        }
     }
 }

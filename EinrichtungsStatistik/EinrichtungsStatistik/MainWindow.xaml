@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Einrichtungs-Statistik" Height="300" Width="483" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="buttonDateneingabe" Content="Dateneingabe" HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top" Width="115"/>
+        <Button x:Name="buttonDateneingabe" Content="Dateneingabe" HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top" Width="115" Click="buttonDateneingabe_Click"/>
         <Button x:Name="buttonFragebogenentwurf" Content="Fragebogenentwurf" HorizontalAlignment="Left" Margin="25,70,0,0" VerticalAlignment="Top" Width="115" Click="buttonFragebogenentwurf_Click"/>
         <Button x:Name="buttonAuswertung" Content="Auswertung" HorizontalAlignment="Left" Margin="25,110,0,0" VerticalAlignment="Top" Width="115"/>
         <Button x:Name="buttonStammdaten" Content="Stammdaten" HorizontalAlignment="Left" Margin="25,150,0,0" VerticalAlignment="Top" Width="115"/>

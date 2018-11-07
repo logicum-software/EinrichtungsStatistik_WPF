@@ -75,5 +75,15 @@ namespace EinrichtungsStatistik
             /*Fragebogenentwurf dlgEntwurf = new Fragebogenentwurf();
             dlgEntwurf.ShowDialog();*/
         }
+
+        private void buttonDateneingabe_Click(object sender, RoutedEventArgs e)
+        {
+            Fragebogenauswahl dlgAuswahl = new Fragebogenauswahl();
+
+            dlgAuswahl.setFrageboegen(loadData().appFrageboegen);
+            dlgAuswahl.disableNew();
+            dlgAuswahl.ShowDialog();
+
+        }
     }
 }
