@@ -15,7 +15,7 @@ namespace EinrichtungsStatistik
     public partial class Fragebogenentwurf : Window
     {
         private AppData appData;
-        private Fragebogen tmpFragebogen;
+        private Fragebogen tmpFragebogen = new Fragebogen();
         private List<Frage> tmpFragen = new List<Frage>();
         private Boolean bChanged = false;
 
@@ -24,7 +24,7 @@ namespace EinrichtungsStatistik
             InitializeComponent();
             loadData();
 
-            int i = 1;
+            /*int i = 1;
             Boolean bFound = false;
 
             if (appData.appFrageboegen.Count > 0)
@@ -46,7 +46,7 @@ namespace EinrichtungsStatistik
             }
 
             tmpFragebogen = new Fragebogen("Fragebogen " + i, new List<Frage>());
-
+            */
             listViewFragen.ItemsSource = tmpFragen;
             listViewEnthalteneFragen.ItemsSource = tmpFragebogen.Fragen;
             refreshLists();
@@ -92,15 +92,25 @@ namespace EinrichtungsStatistik
             }
         }
 
+        internal void setFragebogen(Fragebogen fragebogen)
+        {
+            tmpFragebogen.strName = fragebogen.strName;
+
+            foreach (Frage item in fragebogen.Fragen)
+                tmpFragebogen.Fragen.Add(item);
+
+            refreshLists();
+        }
+
         private void refreshLists()
         {
             tmpFragen.Clear();
 
-            foreach (Frage item in appData.appFragen)
+            /*foreach (Frage item in appData.appFragen)
             {
                 if (!tmpFragebogen.Fragen.Contains(item))
                     tmpFragen.Add(item);
-            }
+            }*/
 
             listViewFragen.Items.Refresh();
             listViewEnthalteneFragen.Items.Refresh();

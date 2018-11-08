@@ -62,6 +62,9 @@ namespace EinrichtungsStatistik
                 tmpFragebogen = new Fragebogen(tmpFrageboegen.ElementAt(listViewAuswahl.SelectedIndex).strName,
                 tmpFrageboegen.ElementAt(listViewAuswahl.SelectedIndex).Fragen);
                 DialogResult = true;
+
+                Fragebogenentwurf dlgEntwurf = new Fragebogenentwurf();
+                dlgEntwurf.ShowDialog();
             }
 
             this.Close();
@@ -69,7 +72,34 @@ namespace EinrichtungsStatistik
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            int i = 1;
+            Boolean bFound = false;
 
+            if (tmpFrageboegen.Count > 0)
+            {
+                while (!bFound)
+                {
+                    foreach (Fragebogen item in tmpFrageboegen)
+                    {
+                        if (item.strName.Equals("Fragebogen " + i))
+                        {
+                            i++;
+                            break;
+                        }
+
+                        if (item.strName.Equals(tmpFrageboegen[tmpFrageboegen.Count - 1].strName))
+                            bFound = true;
+                    }
+                }
+            }
+
+            tmpFragebogen = new Fragebogen("Fragebogen " + i, new List<Frage>());
+
+            DialogResult = true;
+
+            Fragebogenentwurf dlgEntwurf = new Fragebogenentwurf();
+            dlgEntwurf.setFragebogen(tmpFragebogen);
+            dlgEntwurf.ShowDialog();
         }
 
         internal void disableNew()
