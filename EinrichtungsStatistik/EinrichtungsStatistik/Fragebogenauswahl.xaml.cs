@@ -52,9 +52,13 @@ namespace EinrichtungsStatistik
             if (listViewAuswahl.SelectedItem != null)
             {
                 buttonLaden.IsEnabled = true;
+                buttonDelete.IsEnabled = true;
             }
             else
+            {
                 buttonLaden.IsEnabled = false;
+                buttonDelete.IsEnabled = false;
+            }
         }
 
         private void buttonLaden_Click(object sender, RoutedEventArgs e)
@@ -108,6 +112,11 @@ namespace EinrichtungsStatistik
         internal void disableNew()
         {
             buttonNew.IsEnabled = false;
+        }
+
+        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
