@@ -50,7 +50,9 @@ namespace EinrichtungsStatistik
         private void listViewAuswahl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (listViewAuswahl.SelectedItem != null)
+            {
                 buttonLaden.IsEnabled = true;
+            }
             else
                 buttonLaden.IsEnabled = false;
         }
@@ -64,6 +66,7 @@ namespace EinrichtungsStatistik
                 DialogResult = true;
 
                 Fragebogenentwurf dlgEntwurf = new Fragebogenentwurf();
+                dlgEntwurf.setFragebogen(tmpFragebogen);
                 dlgEntwurf.ShowDialog();
             }
 
